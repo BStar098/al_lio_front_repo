@@ -1,38 +1,73 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Navbar {
+  background-color: #ead7c3;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0px;
+  gap: 213px;
+  position: absolute;
+  width: 1366px;
+  height: 80px;
+  left: 0px;
+  top: 0px;
 }
 
-.App-link {
-  color: #61dafb;
+.imagen {
+  height: 138px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Boton {
+  color: #000000;
+}
+a {
+  text-decoration: none;
+}
+
+.formulario {
+  margin-top: 20px;
+}
+
+.bienvenido {
+  margin-top: 190px;
+  font-family: "Basis Grotesque Pro";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: underline;
+}
+
+.titulo-registro {
+  margin-top: 190px;
+  font-family: "Basis Grotesque Pro";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-decoration: underline;
+}
+
+.enviar-datos {
+  margin-top: -90px;
+}
+
+.caja-de-registro {
+  background-color: #ead7c3;
+  margin-left: 90px;
+  margin-left: 190px;
+  margin-right: 360px;
+  border-radius: 15px;
+}
+
+.bienvenido {
+  font-family: "Basis Grotesque Pro";
+}
+
+.caja-de-logeo {
+  background-color: #ead7c3;
+  margin-left: 190px;
+  margin-right: 330px;
+  border-radius: 15px;
 }
