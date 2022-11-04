@@ -3,6 +3,7 @@
 // import axios from "axios";
 import { Button } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import "../styles/Item/styles.css";
 
 function Item() {
   //const [prenda, setPrenda] = useState({});
@@ -37,7 +38,7 @@ function Item() {
       </div>
       <div>
         <div>
-          <img src={`${prenda.imgFront}`} alt="Producto" />
+          <img className="fotoItem" src={`${prenda.imgFront}`} alt="Producto" />
         </div>
         <div>
           <p>Detalle: {prenda.description}</p>
@@ -46,9 +47,9 @@ function Item() {
           <p>Color: {prenda.color}</p>
           <p>Rating: {prenda.rating}</p>
           <Button
+            className="bottonCarrito"
             onClick={""}
             variant="contained"
-            color="primary"
             startIcon={<AddShoppingCartIcon />}
           >
             Agregar a al carrito

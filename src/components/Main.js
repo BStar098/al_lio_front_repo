@@ -4,7 +4,7 @@ import bannerColeccion from "../commonds/bannerColeccion.png";
 import remera from "../commonds/remera.png";
 import pantalon from "../commonds/pantalon.png";
 import abrigo from "../commonds/abrigo.png";
-import "../index.css";
+import "../styles/Main/styles.css";
 
 const Main = () => {
   return (
