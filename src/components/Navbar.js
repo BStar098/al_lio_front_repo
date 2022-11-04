@@ -10,10 +10,10 @@ import img from "./Logo_pagina.png";
 
 const Navbar = () => {
   return (
-    <nav className="Navbar">
-      <a href="Logo tienda ">
-        <img src={img} className="imagen" />
-      </a>
+    <div className="Navbar">
+      <Link to="/">
+        <img src={img} alt="alLioLogo" className="imagen" />
+      </Link>
       <div>
         <Link to="">
           <Button
@@ -49,7 +49,7 @@ const Navbar = () => {
             Mi carrito
           </Button>
         </Link>
-        <a href="http://localhost:3000/api/login">
+        <Link to="/login">
           <Button
             className="Boton"
             startIcon={<LoginIcon />}
@@ -57,8 +57,17 @@ const Navbar = () => {
           >
             Ingresar
           </Button>
-        </a>
-        <Link to="">
+        </Link>
+        <Link to="/signup">
+          <Button
+            className="Boton"
+            startIcon={<LoginIcon />}
+            style={{ backgroundColor: "#ead7c3", color: "black" }}
+          >
+            Registrarse
+          </Button>
+        </Link>
+        <Link to="/logout">
           <Button
             className="Boton"
             startIcon={<LogoutIcon />}
@@ -68,7 +77,7 @@ const Navbar = () => {
           </Button>
         </Link>
       </div>
-    </nav>
+    </div>
   );
 };
 
