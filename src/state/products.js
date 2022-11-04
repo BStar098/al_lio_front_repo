@@ -1,11 +1,63 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+} from "@reduxjs/toolkit";
+import axios from "axios";
 
-const initialProductsState = [];
+const initialState = {
+  isLoading: true,
+  products: [],
+};
 
-export const setAllProducts = createAction("SET_ALL_PRODUCTS");
-export const setOneProduct = createAction("SET_ONE_PRODUCT");
+export const getAllProducts = createAsyncThunk(
+  "GET_ALL_PRODUCTS",
+  (args, thunkAPI) => {
+    return axios
+      .get("/products")
+      .then((clothesArray) => clothesArray.data)
+      .catch((error) => {
+        return thunkAPI.rejectWithValue(error.message);
+      });
+  }
+);
+export const getOneProduct = createAsyncThunk(
+  "GET_ONE_PRODUCT",
+  (id, thunkAPI) => {
+    return axios
+      .get(`/${id}`)
+      .then((product) => product.data)
+      .catch((error) => {
+        return thunkAPI.rejectWithValue(error.message);
+      });
+  }
+);
 
-export const reducer = createReducer(initialProductsState, {
-  [setAllProducts]: (state, action) => (state = action.payload),
-  [setOneProduct]: (state, action) => (state = action.payload),
+const productsSlice = createSlice({
+  name: "products",
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [getAllProducts.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getAllProducts.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.products = action.payload;
+    },
+    [getAllProducts.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [getOneProduct.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getOneProduct.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.products = action.payload;
+    },
+    [getOneProduct.rejected]: (state) => {
+      state.isLoading = false;
+    },
+  },
 });
+
+export default productsSlice.reducer;
