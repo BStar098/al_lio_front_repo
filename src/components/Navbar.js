@@ -5,7 +5,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import "../App.css";
+import "../styles/Navbar/Style.css";
 import img from "./Logo_pagina.png";
 
 const Navbar = () => {
