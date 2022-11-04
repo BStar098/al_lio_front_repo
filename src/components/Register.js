@@ -6,8 +6,24 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Password";
 import EmailIcon from "@mui/icons-material/Email";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const register = () => {
+  const registerHandler = () => {
+    axios
+      .post("http://localhost:3001/api/users/register", {
+        name: "santi",
+        email: "santi@gmail.com",
+        password: "123456",
+        genre: "m",
+        type: "user",
+        direccion: "pepito1234",
+        credits: 4000,
+      })
+      .then((user) => {
+        console.log(user.data);
+      });
+  };
   return (
     <Box
       component="form"
@@ -110,7 +126,7 @@ const register = () => {
         <Button
           className="enviar-datos"
           variant="contained"
-          href="https://www.google.com/"
+          onClick={registerHandler}
         >
           Registrarme
         </Button>
@@ -120,22 +136,3 @@ const register = () => {
 };
 
 export default register;
-
-/*<input type="radio" name="sexo" id="hombre" value="Hombre" />
-          Hombre
-          <input type="radio" name="sexo" id="mujer" value="Mujer" />
-          Mujer
-          <input type="radio" name="sexo" id="none" value="None" />
-          Sin especificar
-
-<TextField
-          id="standard-number"
-          label="Number"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="standard"
-        />
-
-          */

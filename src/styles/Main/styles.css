@@ -1,13 +1,11 @@
 .bannerContainer {
-  width: 90vw;
-  margin-top: 2%;
-  margin-bottom: 2%;
+  width: 100%;
 }
 
 .linkBanner {
   display: flex;
   justify-content: center;
-  width: 100%;
+  margin: 3% 3% 3% 3%;
   position: relative;
 }
 

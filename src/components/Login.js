@@ -1,13 +1,21 @@
-import "../App.css";
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Password";
-
+import axios from "axios";
 const Login = () => {
+  const loginHandler = () => {
+    axios
+      .post("http://localhost:3001/api/users/login", {
+        email: "santi@gmail.com",
+        password: "123456",
+      })
+      .then((user) => {
+        console.log(user.data);
+      });
+  };
   return (
     <Box
       component="form"
@@ -51,7 +59,7 @@ const Login = () => {
             }}
           />
         </div>
-        <Button variant="contained" href="">
+        <Button onClick={loginHandler} variant="contained">
           Ingresar
         </Button>
       </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
 import bannerColeccion from "../commonds/bannerColeccion.png";
 import remera from "../commonds/remera.png";
 import pantalon from "../commonds/pantalon.png";
@@ -10,7 +10,7 @@ const Main = () => {
   return (
     <div>
       <div>
-        <Link href="https://http.cat/" className="linkBanner">
+        <Link to="/products" className="linkBanner">
           <img
             src={bannerColeccion}
             alt="colección"
