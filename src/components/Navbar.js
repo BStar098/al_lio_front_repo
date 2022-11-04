@@ -17,7 +17,11 @@ const Navbar = () => {
       <div>
         <Link to="">
           <Button
-            style={{ backgroundColor: "#ead7c3", color: "black" }}
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
             className="Boton"
             startIcon={<LocalMallIcon />}
           >
@@ -35,7 +39,11 @@ const Navbar = () => {
           <Button
             startIcon={<PersonIcon />}
             className="Boton"
-            style={{ backgroundColor: "#ead7c3", color: "black" }}
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
           >
             Mi perfil
           </Button>
@@ -44,7 +52,11 @@ const Navbar = () => {
           <Button
             startIcon={<ShoppingCartIcon />}
             className="Boton"
-            style={{ backgroundColor: "#ead7c3", color: "black" }}
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
           >
             Mi carrito
           </Button>
@@ -53,7 +65,11 @@ const Navbar = () => {
           <Button
             className="Boton"
             startIcon={<LoginIcon />}
-            style={{ backgroundColor: "#ead7c3", color: "black" }}
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
           >
             Ingresar
           </Button>
@@ -62,7 +78,11 @@ const Navbar = () => {
           <Button
             className="Boton"
             startIcon={<LoginIcon />}
-            style={{ backgroundColor: "#ead7c3", color: "black" }}
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
           >
             Registrarse
           </Button>
@@ -71,7 +91,11 @@ const Navbar = () => {
           <Button
             className="Boton"
             startIcon={<LogoutIcon />}
-            style={{ backgroundColor: "#ead7c3", color: "black" }}
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
           >
             Salir
           </Button>
