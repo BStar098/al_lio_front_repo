@@ -6,28 +6,26 @@ const initialState = {
   products: [],
 };
 
-export const getAllProducts = createAsyncThunk(
-  "GET_ALL_PRODUCTS",
-  (args, thunkAPI) => {
-    return axios
-      .get("/products")
-      .then((clothesArray) => clothesArray.data)
-      .catch((error) => {
-        return thunkAPI.rejectWithValue(error.message);
-      });
-  }
-);
-export const getOneProduct = createAsyncThunk(
-  "GET_ONE_PRODUCT",
-  (id, thunkAPI) => {
-    return axios
-      .get(`/${id}`)
-      .then((product) => product.data)
-      .catch((error) => {
-        return thunkAPI.rejectWithValue(error.message);
-      });
-  }
-);
+export const productsRequests = axios.create({
+  baseURL: "http://localhost:3001/api/products",
+});
+
+export const getAllProducts = createAsyncThunk("GET_ALL_PRODUCTS", () => {
+  return axios
+    .get("/")
+    .then((clothesArray) => clothesArray.data)
+    .catch((error) => {
+      throw new Error(error.message);
+    });
+});
+export const getOneProduct = createAsyncThunk("GET_ONE_PRODUCT", (id) => {
+  return axios
+    .get(`/${id}`)
+    .then((product) => product.data)
+    .catch((error) => {
+      throw new Error(error.message);
+    });
+});
 
 const productsSlice = createSlice({
   name: "products",
