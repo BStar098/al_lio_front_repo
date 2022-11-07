@@ -2,41 +2,47 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
+  //VALOR INICIAL DE NUESTRO ESTADO USER, USAMOS LA PROPIEDAD isLoading PARA DEFINIR CUÁNDO NUESTRA PROMESA ESTÁ O NO PENDING.
   isLoading: true,
-  userData: {},
+  userData: {}, //ACÁ ALOJAMOS LA INFORMACIÓN DEL USUARIO.
 };
 
-export const signUp = createAsyncThunk("SIGN_UP", (userData, thunkAPI) => {
-  return axios
-    .post("http://localhost:3001/api/users/register", userData)
+export const usersRequests = axios.create({
+  //ACÁ CREÉ UNA INSTANCIA DE AXIOS Y LE MODIFIQUÉ LA BASE URL PARA TENER UN CÓDIGO MÁS LIMPIO.
+  baseURL: "http://localhost:3001/api/users",
+});
+
+export const signUp = createAsyncThunk("SIGN_UP", (userData) => {
+  //EL PRIMER ARGUMENTO DE createAsyncThunk ES EL NOMBRE QUE LE PONEMOS A LA ACCIÓN. LUEGO, EL SEGUNDO ARGUMENTO SERÁ UNA CALLBACK FUNCTION QUE PUEDE O NO RECIBIR UN ARGUMENTO(EL ARGUMENTO SE LE SERÁ DADO EN EL DISPATCH, POR EJEMPLO SI NECESITO LOGUEAR A UN USUARIO Y NECESITO PASARLE UN OBJETO CON LA INFORMACIÓN DEL USUARIO, SE LO PASO EN EL DISPATCH Y LUEGO EN ESTA CALLBACK FUNCTION REDUX TRABAJA CON ESA INFORMACIÓN.)
+  return usersRequests
+    .post("/register", userData)
     .then((createdUser) => createdUser.data)
     .catch((error) => {
-      return thunkAPI.rejectWithValue(error.message);
+      throw new Error(error.message); //TIENE QUE SER THROW PARA QUE LA PROMESA FALLE CORRECTAMENTE, SINO SIEMPRE TERMINA EN FULFILLED
     });
 });
-export const logIn = createAsyncThunk("LOG_IN", (userData, thunkAPI) => {
-  return axios
-    .post("http://localhost:3001/api/users/login", userData)
+export const logIn = createAsyncThunk("LOG_IN", (userData) => {
+  return usersRequests
+    .post("/login", userData)
     .then((loggedInUser) => loggedInUser.data)
     .catch((error) => {
-      return thunkAPI.rejectWithValue(error.message);
-    });
-});
-export const logOut = createAsyncThunk("LOG_OUT", (args, thunkAPI) => {
-  return axios
-    .post("http://localhost:3001/api/users/logout")
-    .then(() => "logged out succesfully")
-    .catch((error) => {
-      console.error(error);
-      return thunkAPI.rejectWithValue(error.message);
+      throw new Error(error.message);
     });
 });
 
 const usersSlice = createSlice({
-  name: "users",
-  initialState,
-  reducers: {},
+  name: "users", //DEFINIMOS NOMBRE DEL SLICE
+  initialState, //ACÁ ESTÁ VALOR INICIAL DEL STATE, DEFINIDO PREVIAMENTE
+  reducers: {
+    //ACÁ HAY REDUCERS SINCRONICOS, DE LOS QUE NOS ENSEÑARON EN EL BOOTCAMP
+    logOut: (state) => {
+      state.userData = {};
+      localStorage.removeItem("loggedInUser");
+      alert(`You've been logged out successfully`);
+    },
+  },
   extraReducers: {
+    //ESTOS SON LOS REDUCERS ASINCRÓNICOS, A CADA UNO DE LOS ESTADOS DE LA PROMESA LE CORRESPONDE UNA ACCIÓN DETERMINADA.
     [signUp.pending]: (state) => {
       state.isLoading = true;
     },
@@ -58,19 +64,8 @@ const usersSlice = createSlice({
     [logIn.rejected]: (state) => {
       state.isLoading = false;
     },
-    [logOut.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [logOut.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      alert(action.payload);
-      localStorage.clear();
-      state.userData = {};
-    },
-    [logOut.rejected]: (state) => {
-      state.isLoading = false;
-    },
   },
 });
 
+//LUEGO EXPORTAMOS LA PROPIEDAD reducer DEL SLICE PARA USARLA COMO REDUCER EN NUESTRA STORE.
 export default usersSlice.reducer;

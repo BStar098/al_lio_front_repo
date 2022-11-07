@@ -4,17 +4,10 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Password";
-import axios from "axios";
+import { usersRequests } from "../state/users";
 const Login = () => {
   const loginHandler = () => {
-    axios
-      .post("http://localhost:3001/api/users/login", {
-        email: "santi@gmail.com",
-        password: "123456",
-      })
-      .then((user) => {
-        console.log(user.data);
-      });
+    usersRequests.post("/login", {});
   };
   return (
     <Box
