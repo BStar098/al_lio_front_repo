@@ -7,11 +7,31 @@ import PasswordIcon from "@mui/icons-material/Password";
 import EmailIcon from "@mui/icons-material/Email";
 import { Link } from "react-router-dom";
 import { usersRequests } from "../state/users";
+import { useState } from "react";
 
-const register = () => {
+const Register = () => {
+  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [age, setAge] = useState(null)
+
   const registerHandler = () => {
     usersRequests.post("/register", {});
   };
+
+  const handlePassword = (e)=>{
+    setPassword(e.target.value)
+  }
+  const handleName = (e)=>{
+    setName(e.target.value)
+  }
+  const handleEmail = (e)=>{
+    setEmail(e.target.value)
+  }
+  const handleAge = (e)=>{
+    setAge(e.target.value)
+  }
+
   return (
     <Box
       component="form"
@@ -32,6 +52,8 @@ const register = () => {
               id="input-with-icon-textfield"
               label="Nombre de usuario"
               variant="filled"
+              value={name}
+              onChange={handleName}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -51,6 +73,8 @@ const register = () => {
               type="password"
               autoComplete="current-password"
               variant="filled"
+              value={password}
+              onChange={handlePassword}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -59,6 +83,7 @@ const register = () => {
                 ),
               }}
             />
+            <br/>
             <TextField
               required
               id="filled-password-input"
@@ -76,7 +101,6 @@ const register = () => {
             />
           </Link>
         </div>
-
         <div>
           <Link to="">
             <TextField
@@ -86,6 +110,8 @@ const register = () => {
               type="email"
               autoComplete="current-password"
               variant="filled"
+              value={email}
+              onChange={handleEmail}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -96,7 +122,6 @@ const register = () => {
             />
           </Link>
         </div>
-
         <div>
           <TextField
             required
@@ -104,6 +129,8 @@ const register = () => {
             id="filled-number"
             label="Ingrese su edad"
             type="number"
+            value={age}
+            onChange={handleAge}
             InputLabelProps={{
               shrink: true,
             }}
@@ -123,4 +150,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;
