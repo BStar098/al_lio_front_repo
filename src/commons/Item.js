@@ -50,7 +50,7 @@ function Item() {
     { rating: "3", comment: "Todo ok!!" },
   ];
 
-  let handleChange = (event: SelectChangeEvent) => {
+  let handleChange = (event) => {
     setTalle(event.target.value);
   };
 
