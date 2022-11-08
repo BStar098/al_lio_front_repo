@@ -7,11 +7,15 @@ import PasswordIcon from "@mui/icons-material/Password";
 import EmailIcon from "@mui/icons-material/Email";
 import { Link } from "react-router-dom";
 import { usersRequests } from "../state/users";
+import { useState, useEffect } from "react";
 
 const register = () => {
   const registerHandler = () => {
     usersRequests.post("/register", {});
   };
+
+  //const [registro, setRegistro] = useState([]);
+
   return (
     <Box
       component="form"
@@ -41,6 +45,37 @@ const register = () => {
               }}
             />
           </Link>
+          <div className="requisitos">
+            <h6 className>
+              *Tu usuario debe contener una Mayuscula y una minuscula como
+              minimo
+            </h6>
+            <h6 className="h6-1">
+              *Tu usuario debe contener almenos un numero
+            </h6>
+          </div>
+        </div>
+        <div>
+          <TextField
+            disabled
+            id="standard-disabled"
+            label="Disabled"
+            defaultValue="ELIGE TU GENERO"
+          />
+        </div>
+        <div className="elegir-genero">
+          <div>
+            <input type="radio" name="citizenship" id="sexo" value="hombre" />
+            Hombre
+          </div>
+          <div>
+            <input type="radio" name="citizenship" id="sexo" value="mujer" />
+            Mujer
+          </div>
+          <div>
+            <input type="radio" name="citizenship" id="sexo" value="mujer" />
+            Sin especificar
+          </div>
         </div>
         <div>
           <Link to="">
@@ -76,13 +111,27 @@ const register = () => {
             />
           </Link>
         </div>
-
         <div>
           <Link to="">
             <TextField
               required
               id="filled-password-input"
-              label="Email"
+              label="E-mail"
+              type="email"
+              autoComplete="current-password"
+              variant="filled"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <EmailIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField
+              required
+              id="filled-password-input"
+              label="Repetir E-mail"
               type="email"
               autoComplete="current-password"
               variant="filled"
@@ -96,7 +145,6 @@ const register = () => {
             />
           </Link>
         </div>
-
         <div>
           <TextField
             required
@@ -110,14 +158,15 @@ const register = () => {
             variant="filled"
           />
         </div>
-
-        <Button
-          className="enviar-datos"
-          variant="contained"
-          onClick={registerHandler}
-        >
-          Registrarme
-        </Button>
+        <div className="boton-registro">
+          <Button
+            className="enviar-datos"
+            variant="contained"
+            onClick={registerHandler}
+          >
+            Registrarme
+          </Button>
+        </div>
       </div>
     </Box>
   );

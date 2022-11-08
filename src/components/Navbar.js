@@ -2,11 +2,11 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import "../styles/Navbar/Style.css";
+import "../styles/Navbar, login y register/Style.css";
 import img from "./Logo_pagina.png";
+import BarraDeBusqueda from "./BarraDeBusqueda";
 
 const Navbar = () => {
   return (
@@ -14,40 +14,13 @@ const Navbar = () => {
       <Link to="/">
         <img src={img} alt="alLioLogo" className="imagen" />
       </Link>
-      <div>
-        <Link to="">
-          <Button
-            style={{
-              backgroundColor: "#ead7c3",
-              color: "black",
-              fontFamily: "Canaro",
-            }}
-            className="Boton"
-            startIcon={<LocalMallIcon />}
-          >
-            Productos
-          </Button>
-        </Link>
 
-        <input
-          className="barrita-de-busqueda"
-          type="text"
-          placeholder="Buscar producto..."
-        ></input>
+      <BarraDeBusqueda className="barrita-de-busqueda" />
 
-        <Link to="">
-          <Button
-            startIcon={<PersonIcon />}
-            className="Boton"
-            style={{
-              backgroundColor: "#ead7c3",
-              color: "black",
-              fontFamily: "Canaro",
-            }}
-          >
-            Mi perfil
-          </Button>
-        </Link>
+      <div
+        className="caja-boton"
+        style={{ display: "flex", justifyContent: "flex-end" }}
+      >
         <Link to="">
           <Button
             startIcon={<ShoppingCartIcon />}
@@ -87,7 +60,15 @@ const Navbar = () => {
             Registrarse
           </Button>
         </Link>
-        <Link to="/logout">
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
+
+/*
+ <Link to="/logout">
           <Button
             className="Boton"
             startIcon={<LogoutIcon />}
@@ -100,9 +81,19 @@ const Navbar = () => {
             Salir
           </Button>
         </Link>
-      </div>
-    </div>
-  );
-};
+        */
 
-export default Navbar;
+/*  <Link to="">
+          <Button
+            startIcon={<PersonIcon />}
+            className="Boton"
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
+          >
+            Mi perfil
+          </Button>
+        </Link>
+        */

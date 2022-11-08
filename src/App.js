@@ -7,6 +7,7 @@ import Main from "./components/Main";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Item from "./commons/Item";
+import BarraDeBusqueda from "./components/BarraDeBusqueda";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <div className="bodyContainer">
         <Routes>
           <Route path="/" element={<Main />}></Route>
-          <Route path="/:id" element={<Item/>}></Route>
+          <Route path="/:id" element={<Item />}></Route>
           <Route
             path="/products"
             element={<Grid clothes={clothesArray} />}
