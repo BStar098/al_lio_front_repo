@@ -8,6 +8,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Item from "./commons/Item";
 import Categoria from "./commons/Categoria";
+import AddProduct from "./components/AddProduct";
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
           <Route path="/signup" element={<Register />}></Route>
           <Route path="/logout" element={<div>logout</div>}></Route>
           <Route path="/cat/:categoria" element={<Categoria />}></Route>
+          <Route path="/add" element={<AddProduct />}></Route>
         </Routes>
       </div>
     </div>
