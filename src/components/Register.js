@@ -6,23 +6,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Password";
 import EmailIcon from "@mui/icons-material/Email";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { usersRequests } from "../state/users";
 
 const register = () => {
   const registerHandler = () => {
-    axios
-      .post("http://localhost:3001/api/users/register", {
-        name: "santi",
-        email: "santi@gmail.com",
-        password: "123456",
-        genre: "m",
-        type: "user",
-        direccion: "pepito1234",
-        credits: 4000,
-      })
-      .then((user) => {
-        console.log(user.data);
-      });
+    usersRequests.post("/register", {});
   };
   return (
     <Box
