@@ -9,7 +9,6 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "../styles/Item/styles.css";
@@ -52,6 +51,7 @@ function Item() {
 
   let handleChange = (event) => {
     setTalle(event.target.value);
+    console.log(event.target.value)
   };
 
   return (
