@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllProducts } from "../state/products";
 import { useSelector } from "react-redux";
+import { getOneProduct } from "../state/products";
 
 function Grid() {
   const dispatch = useDispatch();
