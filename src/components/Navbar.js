@@ -48,7 +48,7 @@ const Navbar = () => {
             Mi perfil
           </Button>
         </Link>
-        <Link to="">
+        <Link to="/cart">
           <Button
             startIcon={<ShoppingCartIcon />}
             className="Boton"

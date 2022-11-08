@@ -7,7 +7,13 @@ import Main from "./components/Main";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Item from "./commons/Item";
+
+import carrito from "./components/Cart";
+
+import Categoria from "./commons/Categoria";
 import AddProduct from "./components/AddProduct";
+
+
 
 function App() {
   return (
