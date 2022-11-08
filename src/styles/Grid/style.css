@@ -2,12 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 5%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  gap: 4%;
+  height: 100%;
   background: #ead7c3;
-  padding: 0% 10% 3% 10%;
+  padding: 0% 7% 3% 7%;
 }
 
 .clothingGridCard {
@@ -19,8 +17,8 @@
 }
 
 .clothingGridImg {
-  width: 330px;
-  height: 400px;
+  min-width: 300px;
+  min-height: 400px;
 }
 
 .clothingGridDescription {

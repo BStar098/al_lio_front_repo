@@ -1,8 +1,8 @@
 import React from "react";
 import "../styles/AddProduct/style.css";
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { productsRequests } from "../state/products";
 
 function AddProduct() {
   const navigate = useNavigate();
@@ -35,10 +35,10 @@ function AddProduct() {
   const submitHandler = () => {
     state.img[0] = images.image1;
     state.img[1] = images.image2;
-    axios
-      .post("http://localhost:3001/api/products/", state)
+    productsRequests
+      .post("/", state)
       .then((product) => {
-        alert("Tu producto fue agregado con éxito!");
+        alert("Tu producto fue agregado con �xito!");
         return product.data;
       })
       .then((product) => {
@@ -49,50 +49,52 @@ function AddProduct() {
       });
   };
   return (
-    <div className="addItemContainer">
+    <div className="formContainer">
+      <h1 className="addProductTitle">Sube tu pilcha &#128526;!</h1>
       <div className="inputsContainer">
         <label>
-          Name:
+          Nombre:
           <input onChange={inputHandler} type="text" id="name"></input>
         </label>
         <label>
-          Colour:
+          Color:
           <input onChange={inputHandler} type="text" id="colour"></input>
         </label>
         <label>
-          Size:
+          Talle:
           <input onChange={inputHandler} type="text" id="size"></input>
         </label>
         <label>
-          Price:
+          Precio:
           <input onChange={inputHandler} type="number" id="price"></input>
         </label>
         <label>
           Stock:
-          <input onChange={inputHandler} type="text" id="stock"></input>
+          <input onChange={inputHandler} type="number" id="stock"></input>
         </label>
         <label>
-          Image URL nº1:
+          URL de Imagen Nro. 1:
           <input onChange={imagesHandler} type="text" id="image1"></input>
         </label>
         <label>
-          Image URL nº2:
+          URL de Imagen Nro. 2:
           <input onChange={imagesHandler} type="text" id="image2"></input>
         </label>
         <label>
-          Category:
+          Categoria:
           <select id="select" className="category" onChange={inputHandler}>
-            <option value="shirt">Shirt</option>
-            <option value="hoodie">Hoodie</option>
-            <option value="pants">Pants</option>
+            <option value="remeras">Remera</option>
+            <option value="buzos">Buzo</option>
+            <option value="pantalones">Pantalon</option>
           </select>
         </label>
         <textarea
+          style={{ fontFamily: "Canaro" }}
           onChange={inputHandler}
           id="description"
-          placeholder={`type in your product's description`}
+          placeholder={`Describe tu pilcha.. `}
         ></textarea>
-        <button onClick={submitHandler}>SUBMIT</button>
+        <button onClick={submitHandler}>ENVIAR</button>
       </div>
     </div>
   );

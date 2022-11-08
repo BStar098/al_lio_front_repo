@@ -12,21 +12,19 @@ import AddProduct from "./components/AddProduct";
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <div className="bodyContainer">
-        <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/:id" element={<Item />}></Route>
-          <Route
-            path="/products"
-            element={<Grid clothes={clothesArray} />}
-          ></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<Register />}></Route>
-          <Route path="/logout" element={<div>logout</div>}></Route>
-          <Route path="/add" element={<AddProduct />}></Route>
-        </Routes>
-      </div>
+      <Navbar/>
+      <Routes>
+        <Route path="/" element={<Main />}></Route>
+        <Route path="/:id" element={<Item />}></Route>
+        <Route
+          path="/products"
+          element={<Grid clothes={clothesArray} />}
+        ></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signup" element={<Register />}></Route>
+        <Route path="/logout" element={<div>logout</div>}></Route>
+        <Route path="/add" element={<AddProduct />}></Route>
+      </Routes>
     </div>
   );
 }
