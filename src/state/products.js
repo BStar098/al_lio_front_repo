@@ -10,7 +10,7 @@ export const getAllProducts = createAsyncThunk(
   "GET_ALL_PRODUCTS",
   (args, thunkAPI) => {
     return axios
-      .get("/products")
+      .get("http://localhost:3001/api/products")
       .then((clothesArray) => clothesArray.data)
       .catch((error) => {
         return thunkAPI.rejectWithValue(error.message);
