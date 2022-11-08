@@ -2,9 +2,9 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import BarraDeBusqueda from "./BarraDeBusqueda";
 import "../styles/Navbar/Style.css";
 import img from "../imagenes/Logo_pagina.png";
 
@@ -14,27 +14,10 @@ const Navbar = () => {
       <Link to="/">
         <img src={img} alt="alLioLogo" className="imagen" />
       </Link>
+
+      <BarraDeBusqueda className="barrita-de-busqueda" />
+
       <div>
-        <Link to="">
-          <Button
-            style={{
-              backgroundColor: "#ead7c3",
-              color: "black",
-              fontFamily: "Canaro",
-            }}
-            className="Boton"
-            startIcon={<LocalMallIcon />}
-          >
-            Productos
-          </Button>
-        </Link>
-
-        <input
-          className="barrita-de-busqueda"
-          type="text"
-          placeholder="Buscar producto..."
-        ></input>
-
         <Link to="">
           <Button
             startIcon={<PersonIcon />}
@@ -87,7 +70,15 @@ const Navbar = () => {
             Registrarse
           </Button>
         </Link>
-        <Link to="/logout">
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
+
+/*
+ <Link to="/logout">
           <Button
             className="Boton"
             startIcon={<LogoutIcon />}
@@ -100,9 +91,19 @@ const Navbar = () => {
             Salir
           </Button>
         </Link>
-      </div>
-    </div>
-  );
-};
+        */
 
-export default Navbar;
+/*  <Link to="">
+          <Button
+            startIcon={<PersonIcon />}
+            className="Boton"
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
+          >
+            Mi perfil
+          </Button>
+        </Link>
+        */

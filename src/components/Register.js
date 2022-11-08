@@ -8,6 +8,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import { usersRequests } from "../state/users";
+
 import { useState } from "react";
 import "../styles/Form/style.css";
 
@@ -20,15 +21,16 @@ const Register = () => {
     genre: "",
   });
 
+
   const registerHandler = () => {
     usersRequests.post("/register", user);
   };
+
 
   const handleInput = e => {
     const inputKey = e.target.id || e.target.name;
     setUser({ ...user, [inputKey]: e.target.value });
   };
-
   return (
     <Box
       component="form"
@@ -60,6 +62,37 @@ const Register = () => {
               }}
             />
           </Link>
+          <div className="requisitos">
+            <h6 className>
+              *Tu usuario debe contener una Mayuscula y una minuscula como
+              minimo
+            </h6>
+            <h6 className="h6-1">
+              *Tu usuario debe contener almenos un numero
+            </h6>
+          </div>
+        </div>
+        <div>
+          <TextField
+            disabled
+            id="standard-disabled"
+            label="Disabled"
+            defaultValue="ELIGE TU GENERO"
+          />
+        </div>
+        <div className="elegir-genero">
+          <div>
+            <input type="radio" name="citizenship" id="sexo" value="hombre" />
+            Hombre
+          </div>
+          <div>
+            <input type="radio" name="citizenship" id="sexo" value="mujer" />
+            Mujer
+          </div>
+          <div>
+            <input type="radio" name="citizenship" id="sexo" value="mujer" />
+            Sin especificar
+          </div>
         </div>
         <div className="div-input">
           <Link to="">
@@ -70,6 +103,8 @@ const Register = () => {
               type="password"
               autoComplete="current-password"
               variant="filled"
+              
+
               onChange={handleInput}
               InputProps={{
                 startAdornment: (
@@ -83,9 +118,11 @@ const Register = () => {
         </div>
         <div className="div-input">
           <Link to="">
+            
             <TextField
               required
               label="Email"
+
               type="email"
               id="email"
               variant="filled"
@@ -133,6 +170,7 @@ const Register = () => {
           </FormControl>
         </div>
         <div className="div-input" id="last-div">
+
           <Button
             className="enviar-datos"
             variant="contained"
