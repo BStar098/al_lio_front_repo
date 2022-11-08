@@ -7,14 +7,13 @@ import PasswordIcon from "@mui/icons-material/Password";
 import EmailIcon from "@mui/icons-material/Email";
 import { Link } from "react-router-dom";
 import { usersRequests } from "../state/users";
-import { useState, useEffect } from "react";
 
-const register = () => {
+import { useState } from "react";
+
+const Register = () => {
   const registerHandler = () => {
     usersRequests.post("/register", {});
   };
-
-  //const [registro, setRegistro] = useState([]);
 
   return (
     <Box
@@ -36,6 +35,8 @@ const register = () => {
               id="input-with-icon-textfield"
               label="Nombre de usuario"
               variant="filled"
+              value={name}
+              onChange={handleName}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -86,6 +87,8 @@ const register = () => {
               type="password"
               autoComplete="current-password"
               variant="filled"
+              value={password}
+              onChange={handlePassword}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -94,6 +97,7 @@ const register = () => {
                 ),
               }}
             />
+            <br />
             <TextField
               required
               id="filled-password-input"
@@ -135,6 +139,8 @@ const register = () => {
               type="email"
               autoComplete="current-password"
               variant="filled"
+              value={email}
+              onChange={handleEmail}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -152,6 +158,8 @@ const register = () => {
             id="filled-number"
             label="Ingrese su edad"
             type="number"
+            value={age}
+            onChange={handleAge}
             InputLabelProps={{
               shrink: true,
             }}
@@ -172,4 +180,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

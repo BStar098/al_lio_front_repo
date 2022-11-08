@@ -4,9 +4,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import "../styles/Navbar, login y register/Style.css";
-import img from "./Logo_pagina.png";
 import BarraDeBusqueda from "./BarraDeBusqueda";
+import "../styles/Navbar/Style.css";
+import img from "../imagenes/Logo_pagina.png";
 
 const Navbar = () => {
   return (
@@ -17,11 +17,21 @@ const Navbar = () => {
 
       <BarraDeBusqueda className="barrita-de-busqueda" />
 
-      <div
-        className="caja-boton"
-        style={{ display: "flex", justifyContent: "flex-end" }}
-      >
+      <div>
         <Link to="">
+          <Button
+            startIcon={<PersonIcon />}
+            className="Boton"
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
+          >
+            Mi perfil
+          </Button>
+        </Link>
+        <Link to="/cart">
           <Button
             startIcon={<ShoppingCartIcon />}
             className="Boton"
