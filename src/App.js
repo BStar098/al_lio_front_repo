@@ -7,6 +7,7 @@ import Main from "./components/Main";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Item from "./commons/Item";
+import carrito from "./components/Cart";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             path="/products"
             element={<Grid clothes={clothesArray} />}
           ></Route>
+          <Route path="/cart" elemet={<carrito/>} ></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Register />}></Route>
           <Route path="/logout" element={<div>logout</div>}></Route>
