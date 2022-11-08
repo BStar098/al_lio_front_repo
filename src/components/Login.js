@@ -5,10 +5,23 @@ import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Password";
 import { usersRequests } from "../state/users";
+import "../styles/Login/styles.css";
+import { useState } from "react";
 
 const Login = () => {
+  const [input, setInput] = useState({
+    email: "",
+    password: ""
+  });
+
+  const handleInput = e => {
+    const inputKey = e.target.id;
+    setInput({ ...input, [inputKey]: e.target.value });
+  };
+
   const loginHandler = () => {
-    usersRequests.post("/login", {});
+    console.log(input)
+    usersRequests.post("/login", input);
   };
   return (
     <Box
@@ -19,15 +32,16 @@ const Login = () => {
       noValidate
       autoComplete="off"
     >
-      <div className="caja-de-logeo">
-        <h2 className="bienvenido">
+      <div className="container">
+        <h2 className="title">
           Bienvenido!! ingrese su usuario y contraseña porfavor:
         </h2>
-        <div className="formulario">
+        <div className="div-input">
           <TextField
-            id="input-with-icon-textfield"
             label="E-Mail"
+            id="email"
             variant="filled"
+            onChange={handleInput}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -37,13 +51,14 @@ const Login = () => {
             }}
           />
         </div>
-        <div>
+        <div className="div-input">
           <TextField
-            id="filled-password-input"
             label="Password"
+            id="password"
             type="password"
             autoComplete="current-password"
             variant="filled"
+            onChange={handleInput}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -53,9 +68,11 @@ const Login = () => {
             }}
           />
         </div>
-        <Button onClick={loginHandler} variant="contained">
-          Ingresar
-        </Button>
+        <div className="div-input">
+          <Button onClick={loginHandler} variant="contained">
+            Ingresar
+          </Button>
+        </div>
       </div>
     </Box>
   );
