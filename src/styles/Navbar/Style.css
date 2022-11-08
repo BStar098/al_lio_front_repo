@@ -28,51 +28,6 @@ a {
   margin-top: 20px;
 }
 
-.bienvenido {
-  margin-top: 190px;
-  font-family: "Basis Grotesque Pro";
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 130%;
-  color: rgb(0, 0, 0);
-  text-align: center;
-  text-decoration: underline;
-}
-
-.titulo-registro {
-  margin-top: 190px;
-  font-family: "Basis Grotesque Pro";
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 130%;
-  color: rgb(0, 0, 0);
-  text-align: center;
-  text-decoration: underline;
-}
-
-.enviar-datos {
-  margin-top: -90px;
-}
-
-.caja-de-registro {
-  background-color: #ead7c3;
-  margin-left: 90px;
-  margin-left: 190px;
-  margin-right: 360px;
-  border-radius: 15px;
-}
-
-.bienvenido {
-  font-family: "Basis Grotesque Pro";
-}
-
-.caja-de-logeo {
-  background-color: #ead7c3;
-  margin-left: 190px;
-  margin-right: 330px;
-  border-radius: 15px;
-}
-
 .caja-carrito{
   
 }

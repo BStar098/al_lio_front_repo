@@ -5,12 +5,26 @@ import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Password";
 import { usersRequests } from "../state/users";
-import { useState } from "react";
+
+
 import MiPerfil from "./MiPerfil";
+import "../styles/Form/style.css";
+import { useState } from "react";
 
 const Login = () => {
+  const [input, setInput] = useState({
+    email: "",
+    password: ""
+  });
+
+  const handleInput = e => {
+    const inputKey = e.target.id;
+    setInput({ ...input, [inputKey]: e.target.value });
+  };
+
   const loginHandler = () => {
-    usersRequests.post("/login", {});
+    console.log(input)
+    usersRequests.post("/login", input);
   };
 
   const [miLogin, setMiLogin] = useState("false");
@@ -46,53 +60,48 @@ const Login = () => {
       noValidate
       autoComplete="off"
     >
-      <form id="form_login">
-        <div className="caja-de-logeo">
-          <h2 className="titulo-logeo">
-            Bienvenido!! ingrese su usuario y contraseña porfavor:
-          </h2>
-          <div className="formulario">
-            <TextField
-              required
-              onChange={(e) => setUsuario(e.target.value)}
-              id="txtusuario"
-              label="Usuario"
-              variant="filled"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </div>
-          <div>
-            <TextField
-              required
-              onChange={(e) => setPassword(e.target.value)}
-              id="txtpassword"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              variant="filled"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <PasswordIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </div>
-          <div className="boton-ingreso">
-            <Button onClick={iniciarSesion} variant="contained" required>
-              Ingresar
-            </Button>
-          </div>
+      <div className="container">
+        <h2 className="title">
+          Bienvenido!! ingrese su usuario y contraseña porfavor:
+        </h2>
+        <div className="div-input">
+          <TextField
+            label="E-Mail"
+            id="email"
+            variant="filled"
+            onChange={handleInput}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircle />
+                </InputAdornment>
+              ),
+            }}
+          />
         </div>
-      </form>
-      {miLogin === "true" && <MiPerfil usuario={usuario} />}
+        <div className="div-input">
+          <TextField
+            label="Password"
+            id="password"
+            type="password"
+            autoComplete="current-password"
+            variant="filled"
+            onChange={handleInput}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PasswordIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </div>
+        <div className="div-input">
+          <Button onClick={loginHandler} variant="contained">
+            Ingresar
+          </Button>
+        </div>
+      </div>
     </Box>
   );
 };
