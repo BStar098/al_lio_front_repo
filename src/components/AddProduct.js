@@ -2,30 +2,25 @@ import React from "react";
 import "../styles/AddProduct/style.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { productsRequests } from "../state/products";
-
+import { productsRequests } from "../state/products"
 function AddProduct() {
   const navigate = useNavigate();
   const [images, setImages] = useState({ image1: "", image2: "" });
   const [state, setState] = useState({
     name: "",
     colour: "",
-    size: "",
+    size: "XS",
     price: "",
     stock: "",
-    category: "",
+    category: "remeras",
     description: "",
     img: [],
   });
   const inputHandler = (event) => {
     if (event.target.id === "select") {
-      const inputKey = event.target.className;
-      setState({ ...state, [inputKey]: event.target.value });
+      setState({ ...state, [event.target.className]: event.target.value });
     } else {
-      const inputKey = event.target.id;
-      if (inputKey !== "image1" && inputKey !== "image2") {
-        setState({ ...state, [inputKey]: event.target.value });
-      }
+      setState({ ...state, [event.target.id]: event.target.value });
     }
   };
   const imagesHandler = (event) => {
@@ -61,10 +56,6 @@ function AddProduct() {
           <input onChange={inputHandler} type="text" id="colour"></input>
         </label>
         <label>
-          Talle:
-          <input onChange={inputHandler} type="text" id="size"></input>
-        </label>
-        <label>
           Precio:
           <input onChange={inputHandler} type="number" id="price"></input>
         </label>
@@ -73,11 +64,11 @@ function AddProduct() {
           <input onChange={inputHandler} type="number" id="stock"></input>
         </label>
         <label>
-          URL de Imagen Nro. 1:
+          &#128248; URL N.1:
           <input onChange={imagesHandler} type="text" id="image1"></input>
         </label>
         <label>
-          URL de Imagen Nro. 2:
+          &#128248; URL N.2:
           <input onChange={imagesHandler} type="text" id="image2"></input>
         </label>
         <label>
@@ -88,8 +79,19 @@ function AddProduct() {
             <option value="pantalones">Pantalon</option>
           </select>
         </label>
+        <label>
+          Talle:
+          <select id="select" className="size" onChange={inputHandler}>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+          </select>
+        </label>
+
         <textarea
-          style={{ fontFamily: "Canaro" }}
           onChange={inputHandler}
           id="description"
           placeholder={`Describe tu pilcha.. `}

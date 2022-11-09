@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Item from "./commons/Item";
 import AddProduct from "./components/AddProduct";
+import BarraDeBusqueda from "./components/BarraDeBusqueda";
 
 function App() {
 const [search, setSearch] = useState('')
@@ -19,6 +20,7 @@ const handleSearch = (e)=>{
   return (
     <div className="App">
       <Navbar search={search} handleSearch={handleSearch} />
+      <div className="bodyContainer">
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/:id" element={<Item />}></Route>
@@ -31,7 +33,8 @@ const handleSearch = (e)=>{
         <Route path="/add" element={<AddProduct />}></Route>
         <Route path="/cat/:category" element={<Grid />}></Route>
       </Routes>
-    </div>
+       </div>
+       </div> 
   );
 }
 

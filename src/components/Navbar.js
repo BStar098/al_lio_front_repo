@@ -2,9 +2,9 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import BarraDeBusqueda from "./BarraDeBusqueda";
 import "../styles/Navbar/Style.css";
 import img from "../imagenes/Logo_pagina.png";
 
@@ -14,6 +14,7 @@ const Navbar = (search, handleSearch) => {
       <Link to="/">
         <img src={img} alt="alLioLogo" className="imagen" />
       </Link>
+
       <div>
         <Link to="/products">
           <Button
@@ -29,14 +30,9 @@ const Navbar = (search, handleSearch) => {
           </Button>
         </Link>
 
-        <input
-          className="barrita-de-busqueda"
-          type="text"
-          placeholder="Buscar producto..."
-          value={search}
-          onChange={handleSearch}
-        ></input>
+      <BarraDeBusqueda className="barrita-de-busqueda" />
 
+      <div>
         <Link to="">
           <Button
             startIcon={<PersonIcon />}
@@ -89,6 +85,7 @@ const Navbar = (search, handleSearch) => {
             Registrarse
           </Button>
         </Link>
+
         <Link to="">
           <Button
             className="Boton"
@@ -102,9 +99,19 @@ const Navbar = (search, handleSearch) => {
             Salir
           </Button>
         </Link>
-      </div>
-    </div>
-  );
-};
+        
 
-export default Navbar;
+        <Link to="">
+          <Button
+            startIcon={<PersonIcon />}
+            className="Boton"
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
+          >
+            Mi perfil
+          </Button>
+        </Link>
+        
