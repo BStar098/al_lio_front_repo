@@ -11,7 +11,7 @@ export const productsRequests = axios.create({
 });
 
 export const getAllProducts = createAsyncThunk("GET_ALL_PRODUCTS", () => {
-  return axios
+  return productsRequests
     .get("/")
     .then((clothesArray) => clothesArray.data)
     .catch((error) => {
@@ -19,13 +19,35 @@ export const getAllProducts = createAsyncThunk("GET_ALL_PRODUCTS", () => {
     });
 });
 export const getOneProduct = createAsyncThunk("GET_ONE_PRODUCT", (id) => {
-  return axios
+  return productsRequests
     .get(`/${id}`)
     .then((product) => product.data)
     .catch((error) => {
       throw new Error(error.message);
     });
 });
+export const postOneProduct = createAsyncThunk(
+  "POST_ONE_PRODUCT",
+  (payload) => {
+    return productsRequests
+      .post("/", payload)
+      .then((product) => product.data)
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  }
+);
+export const searchProducts = createAsyncThunk(
+  "SEARCH_PRODUCTS",
+  (dataToFind) => {
+    return productsRequests
+      .get("/search", dataToFind)
+      .then((product) => product.data)
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  }
+);
 
 const productsSlice = createSlice({
   name: "products",
@@ -50,6 +72,26 @@ const productsSlice = createSlice({
       state.products = action.payload;
     },
     [getOneProduct.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [postOneProduct.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [postOneProduct.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.products = action.payload;
+    },
+    [postOneProduct.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [searchProducts.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [searchProducts.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.products = action.payload;
+    },
+    [searchProducts.rejected]: (state) => {
       state.isLoading = false;
     },
   },
