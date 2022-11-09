@@ -31,3 +31,8 @@ a {
 .caja-botones {
   margin-right: 250px;
 }
+
+.barrita-de-busqueda {
+  border-radius: 10px;
+  margin-left: 3%;
+}
