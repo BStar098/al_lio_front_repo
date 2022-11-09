@@ -3,10 +3,10 @@ import { Link, useParams } from "react-router-dom";
 import "../styles/Grid/style.css";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getAllProducts } from "../state/products";
+import { getAllProducts, searchProducts } from "../state/products";
 import { useSelector } from "react-redux";
 
-function Grid(search) {
+function Grid({ search }) {
   const dispatch = useDispatch();
   const clothes = useSelector(state => state.products.products);
   const params = useParams();
@@ -15,9 +15,9 @@ function Grid(search) {
   useEffect(() => {
     if (category) {
       if (search) dispatch(searchProducts({ name: search, category }));
-      dispatch(searchProducts({ category }));
-    } else dispatch(getAllProducts());
-  }, []);
+      dispatch(searchProducts({ category: category }));
+    }
+  }, [category, search]);
 
   return (
     <div className="cardsContainer">
