@@ -1,11 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
-  //VALOR INICIAL DE NUESTRO ESTADO USER, USAMOS LA PROPIEDAD isLoading PARA DEFINIR CUÁNDO NUESTRA PROMESA ESTÁ O NO PENDING.
-  isLoading: true,
-  userData: {}, //ACÁ ALOJAMOS LA INFORMACIÓN DEL USUARIO.
-};
+const localStorageUserData = JSON.parse(localStorage.getItem("loggedInUser"));
+//VALOR INICIAL DE NUESTRO ESTADO USER, SI HAY ALGO GUARDADO EN LOCALSTORAGE, ESO VA A SER NUESTRO ESTADO PREDETERMINADO, SINO SETEAMOS UNO VACÍO, ASÍ LOGRAMOS LA PERSISTENCIA.
+const initialState = localStorageUserData
+  ? {
+      isLoading: false,
+      userData: localStorageUserData, //ACÁ ALOJAMOS LA INFORMACIÓN DEL USUARIO.
+    }
+  : {
+      isLoading: true,
+      userData: {}, //ACÁ ALOJAMOS LA INFORMACIÓN DEL USUARIO.
+    };
 
 export const usersRequests = axios.create({
   //ACÁ CREÉ UNA INSTANCIA DE AXIOS Y LE MODIFIQUÉ LA BASE URL PARA TENER UN CÓDIGO MÁS LIMPIO.
@@ -58,7 +64,8 @@ const usersSlice = createSlice({
     },
     [logIn.fulfilled]: (state, action) => {
       state.isLoading = false;
-      localStorage.setItem("loggedInUser", JSON.parse(action.payload));
+      localStorage.setItem("loggedInUser", JSON.stringify(action.payload));
+
       state.userData = action.payload;
     },
     [logIn.rejected]: (state) => {
@@ -66,6 +73,7 @@ const usersSlice = createSlice({
     },
   },
 });
+export const { logOut } = usersSlice.actions;
 
 //LUEGO EXPORTAMOS LA PROPIEDAD reducer DEL SLICE PARA USARLA COMO REDUCER EN NUESTRA STORE.
 export default usersSlice.reducer;
