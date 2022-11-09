@@ -66,6 +66,7 @@ const usersSlice = createSlice({
     },
   },
 });
+export const { logOut } = usersSlice.actions;
 
 //LUEGO EXPORTAMOS LA PROPIEDAD reducer DEL SLICE PARA USARLA COMO REDUCER EN NUESTRA STORE.
 export default usersSlice.reducer;
