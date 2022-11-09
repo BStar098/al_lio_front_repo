@@ -6,12 +6,13 @@ const initialState = {
   products: [],
 };
 
+
 export const productsRequests = axios.create({
   baseURL: "http://localhost:3001/api/products",
 });
 
 export const getAllProducts = createAsyncThunk("GET_ALL_PRODUCTS", () => {
-  return axios
+  return productsRequests
     .get("/")
     .then((clothesArray) => clothesArray.data)
     .catch((error) => {
@@ -19,7 +20,7 @@ export const getAllProducts = createAsyncThunk("GET_ALL_PRODUCTS", () => {
     });
 });
 export const getOneProduct = createAsyncThunk("GET_ONE_PRODUCT", (id) => {
-  return axios
+  return productsRequests
     .get(`/${id}`)
     .then((product) => product.data)
     .catch((error) => {
