@@ -10,10 +10,12 @@ import img from "../imagenes/Logo_pagina.png";
 
 const Navbar = (search, handleSearch) => {
   return (
-    <div className="Navbar">
-      <Link to="/">
-        <img src={img} alt="alLioLogo" className="imagen" />
-      </Link>
+    <>
+      <div>
+        <Link to="/">
+          <img src={img} alt="alLioLogo" className="imagen" />
+        </Link>
+      </div>
 
       <div>
         <Link to="/products">
@@ -29,6 +31,7 @@ const Navbar = (search, handleSearch) => {
             Productos
           </Button>
         </Link>
+      </div>
 
       <BarraDeBusqueda className="barrita-de-busqueda" />
 
@@ -72,6 +75,7 @@ const Navbar = (search, handleSearch) => {
             Ingresar
           </Button>
         </Link>
+        
         <Link to="/signup">
           <Button
             className="Boton"
@@ -99,7 +103,6 @@ const Navbar = (search, handleSearch) => {
             Salir
           </Button>
         </Link>
-        
 
         <Link to="">
           <Button
@@ -114,4 +117,7 @@ const Navbar = (search, handleSearch) => {
             Mi perfil
           </Button>
         </Link>
-        
+      </div>
+    </>
+  );
+};
