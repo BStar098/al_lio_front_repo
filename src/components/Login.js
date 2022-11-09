@@ -4,13 +4,16 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Password";
-import { usersRequests } from "../state/users";
+import { logIn, usersRequests } from "../state/users";
 import MiPerfil from "./MiPerfil";
 import "../styles/Form/style.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -22,7 +25,13 @@ const Login = () => {
   };
 
   const loginHandler = () => {
-    usersRequests.post("/login", input);
+    dispatch(logIn(input))
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   /*const [miLogin, setMiLogin] = useState("false");
@@ -98,11 +107,9 @@ const Login = () => {
         </div>
         <div className="div-input">
           <div>
-            <Link to="/register">
-              <Button onClick={loginHandler} variant="contained">
-                Ingresar
-              </Button>
-            </Link>
+            <Button onClick={loginHandler} variant="contained">
+              Ingresar
+            </Button>
           </div>
         </div>
       </div>
