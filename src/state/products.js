@@ -4,8 +4,8 @@ import axios from "axios";
 const initialState = {
   isLoading: true,
   products: [],
+  oneProduct: {},
 };
-
 
 export const productsRequests = axios.create({
   baseURL: "http://localhost:3001/api/products",
@@ -41,12 +41,13 @@ export const postOneProduct = createAsyncThunk(
 export const searchProducts = createAsyncThunk(
   "SEARCH_PRODUCTS",
   (dataToFind) => {
-    console.log(dataToFind)
+    console.log(dataToFind);
     return productsRequests
       .get("/search", dataToFind)
       .then((product) => {
-        console.log(product)
-        return product.data})
+        console.log(product);
+        return product.data;
+      })
       .catch((error) => {
         throw new Error(error.message);
       });
@@ -73,7 +74,7 @@ const productsSlice = createSlice({
     },
     [getOneProduct.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.products = action.payload;
+      state.oneProduct = action.payload;
     },
     [getOneProduct.rejected]: (state) => {
       state.isLoading = false;
