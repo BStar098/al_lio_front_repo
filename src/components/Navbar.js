@@ -4,19 +4,17 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LocalMallIcon from '@mui/icons-material/LocalMall';
 import BarraDeBusqueda from "./BarraDeBusqueda";
 import "../styles/Navbar/Style.css";
 import img from "../imagenes/Logo_pagina.png";
 
 const Navbar = (search, handleSearch) => {
   return (
-    <>
-      <div>
+    <div className="Navbar">
         <Link to="/">
           <img src={img} alt="alLioLogo" className="imagen" />
         </Link>
-      </div>
-
       <div>
         <Link to="/products">
           <Button
@@ -33,22 +31,10 @@ const Navbar = (search, handleSearch) => {
         </Link>
       </div>
 
-      <BarraDeBusqueda className="barrita-de-busqueda" />
+        <BarraDeBusqueda className="barrita-de-busqueda" />
 
+        {/* !user ? */}
       <div>
-        <Link to="">
-          <Button
-            startIcon={<PersonIcon />}
-            className="Boton"
-            style={{
-              backgroundColor: "#ead7c3",
-              color: "black",
-              fontFamily: "Canaro",
-            }}
-          >
-            Mi perfil
-          </Button>
-        </Link>
         <Link to="/cart">
           <Button
             startIcon={<ShoppingCartIcon />}
@@ -62,6 +48,7 @@ const Navbar = (search, handleSearch) => {
             Mi carrito
           </Button>
         </Link>
+
         <Link to="/login">
           <Button
             className="Boton"
@@ -75,7 +62,7 @@ const Navbar = (search, handleSearch) => {
             Ingresar
           </Button>
         </Link>
-        
+
         <Link to="/signup">
           <Button
             className="Boton"
@@ -87,6 +74,34 @@ const Navbar = (search, handleSearch) => {
             }}
           >
             Registrarse
+          </Button>
+        </Link>
+        {/* : */}
+        {/* <Link to="">
+          <Button
+            startIcon={<PersonIcon />}
+            className="Boton"
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
+          >
+            Mi perfil
+          </Button>
+        </Link>
+
+        <Link to="/cart">
+          <Button
+            startIcon={<ShoppingCartIcon />}
+            className="Boton"
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
+          >
+            Mi carrito
           </Button>
         </Link>
 
@@ -102,22 +117,11 @@ const Navbar = (search, handleSearch) => {
           >
             Salir
           </Button>
-        </Link>
-
-        <Link to="">
-          <Button
-            startIcon={<PersonIcon />}
-            className="Boton"
-            style={{
-              backgroundColor: "#ead7c3",
-              color: "black",
-              fontFamily: "Canaro",
-            }}
-          >
-            Mi perfil
-          </Button>
-        </Link>
+        </Link> */}
       </div>
-    </>
+    </div>
+    
   );
 };
+
+export default Navbar

@@ -44,7 +44,6 @@ const Register = () => {
         <h2 className="title">
           Ingrese todos los datos para completar el registro:
         </h2>
-        
         <div className="div-input">
           <Link to="">
             <TextField
@@ -72,28 +71,6 @@ const Register = () => {
             </h6>
           </div>
         </div>
-        <div>
-          <TextField
-            disabled
-            id="standard-disabled"
-            label="Disabled"
-            defaultValue="ELIGE TU GENERO"
-          />
-        </div>
-        <div className="elegir-genero">
-          <div>
-            <input type="radio" name="citizenship" id="sexo" value="hombre" />
-            Hombre
-          </div>
-          <div>
-            <input type="radio" name="citizenship" id="sexo" value="mujer" />
-            Mujer
-          </div>
-          <div>
-            <input type="radio" name="citizenship" id="sexo" value="mujer" />
-            Sin especificar
-          </div>
-        </div>
         <div className="div-input">
           <Link to="">
             <TextField
@@ -103,8 +80,6 @@ const Register = () => {
               type="password"
               autoComplete="current-password"
               variant="filled"
-              
-
               onChange={handleInput}
               InputProps={{
                 startAdornment: (
@@ -118,11 +93,9 @@ const Register = () => {
         </div>
         <div className="div-input">
           <Link to="">
-            
             <TextField
               required
               label="Email"
-
               type="email"
               id="email"
               variant="filled"
@@ -170,7 +143,6 @@ const Register = () => {
           </FormControl>
         </div>
         <div className="div-input" id="last-div">
-
           <Button
             className="enviar-datos"
             variant="contained"

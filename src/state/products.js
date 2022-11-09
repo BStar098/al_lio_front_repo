@@ -41,9 +41,12 @@ export const postOneProduct = createAsyncThunk(
 export const searchProducts = createAsyncThunk(
   "SEARCH_PRODUCTS",
   (dataToFind) => {
+    console.log(dataToFind)
     return productsRequests
       .get("/search", dataToFind)
-      .then((product) => product.data)
+      .then((product) => {
+        console.log(product)
+        return product.data})
       .catch((error) => {
         throw new Error(error.message);
       });
