@@ -1,5 +1,11 @@
 import { Box } from "@mui/system";
-import { Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -21,13 +27,11 @@ const Register = () => {
     genre: "",
   });
 
-
   const registerHandler = () => {
     usersRequests.post("/register", user);
   };
 
-
-  const handleInput = e => {
+  const handleInput = (e) => {
     const inputKey = e.target.id || e.target.name;
     setUser({ ...user, [inputKey]: e.target.value });
   };
@@ -44,7 +48,7 @@ const Register = () => {
         <h2 className="title">
           Ingrese todos los datos para completar el registro:
         </h2>
-        
+
         <div className="div-input">
           <Link to="">
             <TextField
@@ -62,38 +66,8 @@ const Register = () => {
               }}
             />
           </Link>
-          <div className="requisitos">
-            <h6 className>
-              *Tu usuario debe contener una Mayuscula y una minuscula como
-              minimo
-            </h6>
-            <h6 className="h6-1">
-              *Tu usuario debe contener almenos un numero
-            </h6>
-          </div>
         </div>
-        <div>
-          <TextField
-            disabled
-            id="standard-disabled"
-            label="Disabled"
-            defaultValue="ELIGE TU GENERO"
-          />
-        </div>
-        <div className="elegir-genero">
-          <div>
-            <input type="radio" name="citizenship" id="sexo" value="hombre" />
-            Hombre
-          </div>
-          <div>
-            <input type="radio" name="citizenship" id="sexo" value="mujer" />
-            Mujer
-          </div>
-          <div>
-            <input type="radio" name="citizenship" id="sexo" value="mujer" />
-            Sin especificar
-          </div>
-        </div>
+
         <div className="div-input">
           <Link to="">
             <TextField
@@ -103,8 +77,6 @@ const Register = () => {
               type="password"
               autoComplete="current-password"
               variant="filled"
-              
-
               onChange={handleInput}
               InputProps={{
                 startAdornment: (
@@ -118,11 +90,9 @@ const Register = () => {
         </div>
         <div className="div-input">
           <Link to="">
-            
             <TextField
               required
               label="Email"
-
               type="email"
               id="email"
               variant="filled"
@@ -155,29 +125,32 @@ const Register = () => {
           />
         </div>
         <div className="div-input">
-        <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-filled-label">Sexo</InputLabel>
-          <Select
-            labelId="demo-simple-select-filled-label"
-            name="genre"
-            value={user.genre}
-            onChange={handleInput}
-          >
-            <MenuItem value={"masculino"}>Masculino</MenuItem>
-            <MenuItem value={"femenino"}>Femenino</MenuItem>
-            <MenuItem value={"no binario"}>No binario</MenuItem>
-          </Select>
+          <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-filled-label">Sexo</InputLabel>
+            <Select
+              labelId="demo-simple-select-filled-label"
+              name="genre"
+              value={user.genre}
+              onChange={handleInput}
+            >
+              <MenuItem value={"masculino"}>Masculino</MenuItem>
+              <MenuItem value={"femenino"}>Femenino</MenuItem>
+              <MenuItem value={"no binario"}>No binario</MenuItem>
+            </Select>
           </FormControl>
         </div>
         <div className="div-input" id="last-div">
-
-          <Button
-            className="enviar-datos"
-            variant="contained"
-            onClick={registerHandler}
-          >
-            Registrarme
-          </Button>
+          <div>
+            <Link to="/login">
+              <Button
+                className="enviar-datos"
+                variant="contained"
+                onClick={registerHandler}
+              >
+                Registrarme
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </Box>

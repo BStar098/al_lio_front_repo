@@ -6,28 +6,28 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Password";
 import { usersRequests } from "../state/users";
 
-
 import MiPerfil from "./MiPerfil";
 import "../styles/Form/style.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [input, setInput] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
-  const handleInput = e => {
+  const handleInput = (e) => {
     const inputKey = e.target.id;
     setInput({ ...input, [inputKey]: e.target.value });
   };
 
   const loginHandler = () => {
-    console.log(input)
+    console.log(input);
     usersRequests.post("/login", input);
   };
 
-  const [miLogin, setMiLogin] = useState("false");
+  /*const [miLogin, setMiLogin] = useState("false");
   const [usuario, setUsuario] = useState(""); //Captura el nombre de usuario
   const [password, setPassword] = useState(""); //Captura la contraseña
 
@@ -50,7 +50,7 @@ const Login = () => {
       }
     }
   }
-
+*/
   return (
     <Box
       component="form"
@@ -66,7 +66,8 @@ const Login = () => {
         </h2>
         <div className="div-input">
           <TextField
-            label="E-Mail"
+            required
+            label="E-mail"
             id="email"
             variant="filled"
             onChange={handleInput}
@@ -81,6 +82,7 @@ const Login = () => {
         </div>
         <div className="div-input">
           <TextField
+            required
             label="Password"
             id="password"
             type="password"
@@ -97,9 +99,13 @@ const Login = () => {
           />
         </div>
         <div className="div-input">
-          <Button onClick={loginHandler} variant="contained">
-            Ingresar
-          </Button>
+          <div>
+            <Link to="/register">
+              <Button onClick={loginHandler} variant="contained">
+                Ingresar
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </Box>

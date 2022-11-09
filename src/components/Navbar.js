@@ -17,20 +17,7 @@ const Navbar = () => {
 
       <BarraDeBusqueda className="barrita-de-busqueda" />
 
-      <div>
-        <Link to="">
-          <Button
-            startIcon={<PersonIcon />}
-            className="Boton"
-            style={{
-              backgroundColor: "#ead7c3",
-              color: "black",
-              fontFamily: "Canaro",
-            }}
-          >
-            Mi perfil
-          </Button>
-        </Link>
+      <div className="caja-botones">
         <Link to="/cart">
           <Button
             startIcon={<ShoppingCartIcon />}
@@ -94,6 +81,21 @@ export default Navbar;
         */
 
 /*  <Link to="">
+          <Button
+            startIcon={<PersonIcon />}
+            className="Boton"
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
+          >
+            Mi perfil
+          </Button>
+        </Link>
+        */
+
+/* <Link to="">
           <Button
             startIcon={<PersonIcon />}
             className="Boton"
