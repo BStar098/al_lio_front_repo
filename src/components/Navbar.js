@@ -14,7 +14,7 @@ const Navbar = () => {
       <Link to="/">
         <img src={img} alt="alLioLogo" className="imagen" />
       </Link>
-      <div>
+      <div> 
         <Link to="">
           <Button
             style={{

@@ -1,13 +1,13 @@
 .formContainer
-    margin: 2% 35%
+    margin: 1% calc(100%/3)
     background: #ead7c3
     padding: 1.5%
     box-shadow: 8px 8px 3px #887d7263
     border-radius: 5px
+    max-width: calc(100%/3)
     min-width: fit-content
     >.inputsContainer
         height: fit-content
-        
         display: flex
         flex-direction: column
         >*
@@ -73,12 +73,13 @@
 
 @media screen and ( max-width:600px  )
     .formContainer
+        min-width: 100%
         margin: 0%
         display: flex
         flex-direction: column
         text-align: center
+        min-height: fit-content
         >.inputsContainer
-            height: 100vh
             justify-content: center
             align-items: center
             >*
