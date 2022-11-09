@@ -6,8 +6,8 @@ import Main from "./components/Main";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Item from "./commons/Item";
+import Cart from "./components/Cart";
 import AddProduct from "./components/AddProduct";
-import BarraDeBusqueda from "./components/BarraDeBusqueda";
 import { useDispatch } from "react-redux";
 import { getAllProducts } from "./state/products";
 
@@ -17,6 +17,7 @@ function App() {
 
   const handleSearch = e => {
     setSearch(e.target.value);
+    console.log(e.tagret);
   };
 
   useEffect(() => {
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/:id" element={<Item />}></Route>
+          <Route path="/cart" element={<Cart />}></Route>
           <Route path="/products" element={<Grid search={search} />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Register />}></Route>

@@ -4,7 +4,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
 import BarraDeBusqueda from "./BarraDeBusqueda";
 import "../styles/Navbar/Style.css";
 import img from "../imagenes/Logo_pagina.png";
@@ -14,6 +13,7 @@ import { logOut } from "../state/users";
 const Navbar = (search, handleSearch) => {
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.users.userData);
+
   const handleLogOut = () => {
     dispatch(logOut());
   };
@@ -23,8 +23,8 @@ const Navbar = (search, handleSearch) => {
       <Link to="/">
         <img src={img} alt="alLioLogo" className="imagen" />
       </Link>
-
-      <BarraDeBusqueda className="barrita-de-busqueda" />
+    
+      <BarraDeBusqueda className="barrita-de-busqueda" handleSearch={handleSearch}/>
 
       <div className="caja-botones">
         {!usuario.name ? (
@@ -100,7 +100,7 @@ const Navbar = (search, handleSearch) => {
             <Button
               startIcon={<LogoutIcon />}
               className="Boton"
-              /*onClick={handleLogOut}*/
+              onClick={handleLogOut}
               style={{
                 backgroundColor: "#ead7c3",
                 color: "black",
