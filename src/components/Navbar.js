@@ -8,12 +8,27 @@ import BarraDeBusqueda from "./BarraDeBusqueda";
 import "../styles/Navbar/Style.css";
 import img from "../imagenes/Logo_pagina.png";
 
-const Navbar = () => {
+const Navbar = (search, handleSearch) => {
   return (
     <div className="Navbar">
       <Link to="/">
         <img src={img} alt="alLioLogo" className="imagen" />
       </Link>
+
+      <div>
+        <Link to="/products">
+          <Button
+            style={{
+              backgroundColor: "#ead7c3",
+              color: "black",
+              fontFamily: "Canaro",
+            }}
+            className="Boton"
+            startIcon={<LocalMallIcon />}
+          >
+            Productos
+          </Button>
+        </Link>
 
       <BarraDeBusqueda className="barrita-de-busqueda" />
 
@@ -70,15 +85,8 @@ const Navbar = () => {
             Registrarse
           </Button>
         </Link>
-      </div>
-    </div>
-  );
-};
 
-export default Navbar;
-
-/*
- <Link to="/logout">
+        <Link to="">
           <Button
             className="Boton"
             startIcon={<LogoutIcon />}
@@ -91,9 +99,9 @@ export default Navbar;
             Salir
           </Button>
         </Link>
-        */
+        
 
-/*  <Link to="">
+        <Link to="">
           <Button
             startIcon={<PersonIcon />}
             className="Boton"
@@ -106,4 +114,4 @@ export default Navbar;
             Mi perfil
           </Button>
         </Link>
-        */
+        

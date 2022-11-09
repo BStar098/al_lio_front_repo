@@ -1,16 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../styles/Grid/style.css";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllProducts } from "../state/products";
 import { useSelector } from "react-redux";
 
-function Grid() {
+function Grid(search) {
   const dispatch = useDispatch();
-  const clothes = useSelector((state) => state.products.products);
+  const clothes = useSelector(state => state.products.products);
+  const params = useParams();
+  const category = params.category;
+
   useEffect(() => {
-    dispatch(getAllProducts());
+    if (category) {
+      if (search) dispatch(searchProducts({ name: search, category }));
+      dispatch(searchProducts({ category }));
+    } else dispatch(getAllProducts());
   }, []);
 
   return (
