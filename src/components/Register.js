@@ -66,6 +66,7 @@ const Register = () => {
               }}
             />
           </Link>
+        </div>
         <div className="div-input">
           <Link to="">
             <TextField
@@ -149,9 +150,6 @@ const Register = () => {
               </Button>
             </Link>
           </div>
-
-          
-
         </div>
       </div>
     </Box>
