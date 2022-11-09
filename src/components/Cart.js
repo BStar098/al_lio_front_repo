@@ -1,18 +1,19 @@
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import InputAdornment from "@mui/material/InputAdornment";
 import LogoutIcon from "@mui/icons-material/Logout";
 import DeleteIcon from '@mui/icons-material/Delete';
 import PlusOneIcon from '@mui/icons-material/PlusOne';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import DeleteSweepOutlinedIcon from '@mui/icons-material/DeleteSweepOutlined';
+import Cartitem from "../commons/Cart-item";
 
 const carrito = () => {
     // const cartHandler = () => {
     //     usersRequests.post("/cart", {});
     //   };
+   
+
     return (
     <Box>   
     <div class="caja-de-carrito">
@@ -23,16 +24,17 @@ const carrito = () => {
           <div id="carrito-contenedor">
              
              <div class="botones">
-                   <Button>
+             <Cartitem />
+                   <Button style={{color:"black"}}>
                     <PlusOneIcon />
                    </Button>
 
-                   <Button>
+                   <Button style={{color:"black"}}>
                    <DeleteIcon />
                    </Button>
                </div> 
            </div>
-
+        
            
            <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
            

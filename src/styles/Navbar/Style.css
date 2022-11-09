@@ -91,14 +91,39 @@ a {
   color: rgb(0, 0, 0);
   text-align: center;
   text-decoration: underline;
-
+  display: inline-flex;
 }
 
 .botones{
-  margin-left: 300px;
+  margin-left: center;
   border: 10px 10px;
   margin-bottom: 0px;
   padding: 5px;
   border: 10px;
+  display:inline-flex ;
+}
+
+.imagencarrito{
+  height: 80px;
+  width: 80px;
+  text-align: left;
+  margin-right: 300px;
+  margin-top: 2px;
+}
+.contenedorCarrito{
+ display:inline-flex;
+ text-align: left;
+ margin-right: 1px;
+}
+
+.tituloitem{
+  margin-left: 90px;
+  position: fixed;
+  margin-top: 10px;
+}
+.precioitem{
+  margin-left: 90px;
+  position: fixed;
+  margin-top: 50px;
 }
 
