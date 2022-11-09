@@ -8,14 +8,14 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import "../styles/Navbar/Style.css";
 import img from "../imagenes/Logo_pagina.png";
 
-const Navbar = () => {
+const Navbar = (search, handleSearch) => {
   return (
     <div className="Navbar">
       <Link to="/">
         <img src={img} alt="alLioLogo" className="imagen" />
       </Link>
       <div>
-        <Link to="">
+        <Link to="/products">
           <Button
             style={{
               backgroundColor: "#ead7c3",
@@ -33,6 +33,8 @@ const Navbar = () => {
           className="barrita-de-busqueda"
           type="text"
           placeholder="Buscar producto..."
+          value={search}
+          onChange={handleSearch}
         ></input>
 
         <Link to="">
@@ -87,7 +89,7 @@ const Navbar = () => {
             Registrarse
           </Button>
         </Link>
-        <Link to="/logout">
+        <Link to="">
           <Button
             className="Boton"
             startIcon={<LogoutIcon />}

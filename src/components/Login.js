@@ -5,7 +5,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import PasswordIcon from "@mui/icons-material/Password";
 import { usersRequests } from "../state/users";
-import "../styles/Login/styles.css";
+import "../styles/Form/style.css";
 import { useState } from "react";
 
 const Login = () => {
@@ -20,7 +20,6 @@ const Login = () => {
   };
 
   const loginHandler = () => {
-    console.log(input)
     usersRequests.post("/login", input);
   };
   return (
