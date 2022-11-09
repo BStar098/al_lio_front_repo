@@ -22,7 +22,7 @@ const Main = () => {
       <div className="margenCat">
         <div className="containerCat">
           <div>
-            <Link to="/cat/remeras">
+            <Link to="/cat/remera">
               <img src={remera} alt="Remeras" className="fotoCategoria"></img>
             </Link>
             <div className="titCat">
@@ -30,7 +30,7 @@ const Main = () => {
             </div>
           </div>
           <div>
-            <Link to="/cat/pantalones">
+            <Link to="/cat/pantalon">
               <img
                 src={pantalon}
                 alt="Pantalones"
@@ -42,7 +42,7 @@ const Main = () => {
             </div>
           </div>
           <div>
-            <Link to="/cat/buzos">
+            <Link to="/cat/buzo">
               <img src={abrigo} alt="Abrigos" className="fotoCategoria"></img>
             </Link>
             <div className="titCat">

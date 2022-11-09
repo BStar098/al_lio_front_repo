@@ -14,11 +14,14 @@
   margin-top: 2%;
   box-shadow: 3px 3px 3px 2px rgba(134, 122, 110, 0.6352941176);
   background: #ffffff;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .clothingGridImg {
-  max-width: 280px;
-  max-height: 345px;
+  width: 280px;
+  height: 345px;
 }
 
 .clothingGridDescription {
