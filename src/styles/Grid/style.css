@@ -20,8 +20,8 @@
 }
 
 .clothingGridImg {
-  max-width: 280px;
-  max-height: 345px;
+  width: 280px;
+  height: 345px;
 }
 
 .clothingGridDescription {
