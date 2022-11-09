@@ -4,8 +4,8 @@ import axios from "axios";
 const initialState = {
   isLoading: true,
   products: [],
+  oneProduct: {},
 };
-
 
 export const productsRequests = axios.create({
   baseURL: "http://localhost:3001/api/products",
@@ -27,6 +27,32 @@ export const getOneProduct = createAsyncThunk("GET_ONE_PRODUCT", (id) => {
       throw new Error(error.message);
     });
 });
+export const postOneProduct = createAsyncThunk(
+  "POST_ONE_PRODUCT",
+  (payload) => {
+    return productsRequests
+      .post("/", payload)
+      .then((product) => product.data)
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  }
+);
+export const searchProducts = createAsyncThunk(
+  "SEARCH_PRODUCTS",
+  (dataToFind) => {
+    console.log(dataToFind);
+    return productsRequests
+      .get("/search", dataToFind)
+      .then((product) => {
+        console.log(product);
+        return product.data;
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  }
+);
 
 const productsSlice = createSlice({
   name: "products",
@@ -48,9 +74,29 @@ const productsSlice = createSlice({
     },
     [getOneProduct.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.products = action.payload;
+      state.oneProduct = action.payload;
     },
     [getOneProduct.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [postOneProduct.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [postOneProduct.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.products = action.payload;
+    },
+    [postOneProduct.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [searchProducts.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [searchProducts.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.products = action.payload;
+    },
+    [searchProducts.rejected]: (state) => {
       state.isLoading = false;
     },
   },

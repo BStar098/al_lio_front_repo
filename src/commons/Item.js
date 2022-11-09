@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-// import { useParams } from "react-router";
-// import axios from "axios";
+import { getOneProduct } from "../state/products";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
 import {
   Button,
   Grid,
@@ -9,36 +11,22 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "../styles/Item/styles.css";
 
 function Item() {
   const [talle, setTalle] = useState("");
-  //   const params = useParams();
-  //   const id = params.id;
+  const params = useParams();
+  const id = params.id;
 
-  //   useEffect(() => {
-  //     axios
-  //       .get("")
-  //       .then((res) => res.data)
-  //       .then((data) => {
-  //         setPrenda(data);
-  //       })
-  //       .catch(() => console.error("No se encontró el producto"));
-  //   }, []);
-
-  let prenda = {
-    name: "Remera Mockup",
-    description: "Remera cuello redondo con estampa",
-    imgFront:
-      "https://img.freepik.com/psd-gratis/maqueta-vista-frontal-modelo-camiseta-negra_125540-1059.jpg?w=1380&t=st=1667417847~exp=1667418447~hmac=6b462698be6e5f34d702992e6108e90a75d3a938223b83801d31a9e6148b990f",
-    price: 5000,
-    size: ["S", "M", "L", "XL"],
-    color: ["negro"],
-    rating: 3.5,
-  };
+  const dispatch = useDispatch();
+  const clothes = useSelector((state) => state.products.oneProduct);
+  useEffect(() => {
+    dispatch(getOneProduct(id)).then(() => {
+      console.log(clothes);
+    });
+  }, [id]);
 
   let reviews = [
     { rating: "5", comment: "Buena calidad" },
@@ -50,9 +38,11 @@ function Item() {
     { rating: "3", comment: "Todo ok!!" },
   ];
 
-  let handleChange = (event: SelectChangeEvent) => {
+  let handleChange = (event) => {
     setTalle(event.target.value);
   };
+
+  let handleCarrito = () => {};
 
   return (
     <div>
@@ -62,24 +52,24 @@ function Item() {
             <div className="divCentrado">
               <img
                 className="fotoItem"
-                src={`${prenda.imgFront}`}
+                src={`${clothes.img[0]}`}
                 alt="Producto"
               />
             </div>
           </Grid>
           <Grid item xs={6}>
             <div className="topDiv">
-              <h1>{prenda.name}</h1>
+              <h1>{clothes.name}</h1>
               <p>
                 <Rating
                   name="read-only"
-                  value={prenda.rating}
+                  value={clothes.rating}
                   precision={0.5}
                   readOnly
                 />
               </p>
-              <p>Detalle: {prenda.description}</p>
-              <p>Color: {prenda.color}</p>
+              <p>Detalle: {clothes.description}</p>
+              <p>Color: {clothes.colour}</p>
 
               <FormControl sx={{ m: 1, minWidth: 100 }}>
                 <InputLabel id="demo-simple-select-label">Talle:</InputLabel>
@@ -90,17 +80,13 @@ function Item() {
                   label="Age"
                   onChange={handleChange}
                 >
-                  {prenda.size.map((talle, i) => (
-                    <MenuItem key={i} value={talle}>
-                      {talle}
-                    </MenuItem>
-                  ))}
+                  <MenuItem value={clothes.size}>{clothes.size}</MenuItem>
                 </Select>
               </FormControl>
 
-              <p style={{ fontSize: "1.5rem" }}>Precio: ${prenda.price}</p>
+              <p style={{ fontSize: "1.5rem" }}>Precio: ${clothes.price}</p>
               <Button
-                onClick={""}
+                onClick={handleCarrito}
                 startIcon={<AddShoppingCartIcon />}
                 style={{
                   backgroundColor: "#ead7c3",
