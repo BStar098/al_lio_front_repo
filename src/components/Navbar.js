@@ -29,7 +29,20 @@ const Navbar = ({search, handleSearch}) => {
 
       <div className="caja-botones">
         {!usuario.name ? (
-          <>
+         <>
+            <Link to="/cart">
+              <Button
+                startIcon={<ShoppingCartIcon />}
+                className="Boton"
+                style={{
+                  backgroundColor: "#ead7c3",
+                  color: "black",
+                  fontFamily: "Canaro",
+                }}
+              >
+                Mi carrito
+              </Button>
+            </Link>
             <Link to="/login">
               <Button
                 className="Boton"
@@ -59,7 +72,7 @@ const Navbar = ({search, handleSearch}) => {
           </>
         ) : (
           <>
-            <Link to="">
+            <Link to="/profile">
               <Button
                 startIcon={<PersonIcon />}
                 className="Boton"
@@ -72,6 +85,7 @@ const Navbar = ({search, handleSearch}) => {
                 {usuario.name}
               </Button>
             </Link>
+
             <Link to="/cart">
               <Button
                 startIcon={<ShoppingCartIcon />}
@@ -84,8 +98,8 @@ const Navbar = ({search, handleSearch}) => {
               >
                 Mi carrito
               </Button>
-            </Link>
 
+            </Link>
             <Link to="/add">
               <Button
                 startIcon={<AddIcon />}
@@ -114,7 +128,6 @@ const Navbar = ({search, handleSearch}) => {
                 Salir
               </Button>
             </Link>
-
           </>
         )}
       </div>
