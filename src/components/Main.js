@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import bannerColeccion from "../commonds/bannerColeccion.png";
-import remera from "../commonds/remera.png";
-import pantalon from "../commonds/pantalon.png";
-import abrigo from "../commonds/abrigo.png";
+import bannerColeccion from "../imagenes/bannerColeccion.png";
+import remera from "../imagenes/remera.png";
+import pantalon from "../imagenes/pantalon.png";
+import abrigo from "../imagenes/abrigo.png";
 import "../styles/Main/styles.css";
 
 const Main = () => {
@@ -22,7 +22,7 @@ const Main = () => {
       <div className="margenCat">
         <div className="containerCat">
           <div>
-            <Link href="">
+            <Link to="/cat/remera">
               <img src={remera} alt="Remeras" className="fotoCategoria"></img>
             </Link>
             <div className="titCat">
@@ -30,7 +30,7 @@ const Main = () => {
             </div>
           </div>
           <div>
-            <Link href="">
+            <Link to="/cat/pantalon">
               <img
                 src={pantalon}
                 alt="Pantalones"
@@ -42,7 +42,7 @@ const Main = () => {
             </div>
           </div>
           <div>
-            <Link href="">
+            <Link to="/cat/buzo">
               <img src={abrigo} alt="Abrigos" className="fotoCategoria"></img>
             </Link>
             <div className="titCat">

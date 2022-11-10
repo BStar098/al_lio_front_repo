@@ -1,30 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Grid from "./commons/Grid";
-import { clothesArray } from "./utils/dummyClothes";
 import Navbar from "./components/Navbar";
 import Main from "./components/Main";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Item from "./commons/Item";
+import Cart from "./components/Cart";
+import AddProduct from "./components/AddProduct";
+import { useDispatch } from "react-redux";
+import { getAllProducts } from "./state/products";
 import CartTest from "./components/CartTest";
 
+
 function App() {
+  const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSearch = e => {
+    if(e.key==='Enter'){
+      setSearch(e.target.value);
+    }
+    console.log(e.key);
+  };
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, []);
+
   return (
     <div className="App">
-      <Navbar />
+      <Navbar search={search} handleSearch={handleSearch} />
       <div className="bodyContainer">
         <Routes>
           <Route path="/test" element={<CartTest />}></Route>
           <Route path="/" element={<Main />}></Route>
           <Route path="/:id" element={<Item />}></Route>
-          <Route
-            path="/products"
-            element={<Grid clothes={clothesArray} />}
-          ></Route>
+
+          <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/products" element={<Grid search={search} />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Register />}></Route>
-          <Route path="/logout" element={<div>logout</div>}></Route>
+          <Route path="/add" element={<AddProduct />}></Route>
+          <Route path="/cat/:category" element={<Grid />}></Route>
         </Routes>
       </div>
     </div>
