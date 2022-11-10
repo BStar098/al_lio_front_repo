@@ -22,7 +22,6 @@ function Item() {
   const [talle, setTalle] = useState("");
   const params = useParams();
   const id = params.id;
-  const [talle, setTalle] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(null)
 
