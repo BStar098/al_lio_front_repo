@@ -29,5 +29,6 @@ a {
 }
 
 .caja-botones {
-  margin-right: 250px;
+  margin-right: 10%;
+  width: fit-content;
 }

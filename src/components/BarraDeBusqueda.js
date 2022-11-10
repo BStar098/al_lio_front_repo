@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
-
+import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -8,6 +8,14 @@ import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
 
 import SearchIcon from "@mui/icons-material/Search";
+
+const buscarProducto = (products) => {
+  return products.map((products) => {
+    {
+      <tr key={products.id}></tr>;
+    }
+  });
+};
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
