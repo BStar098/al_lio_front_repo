@@ -16,8 +16,10 @@ function App() {
   const dispatch = useDispatch();
 
   const handleSearch = e => {
-    setSearch(e.target.value);
-    console.log(e.tagret);
+    if(e.key==='Enter'){
+      setSearch(e.target.value);
+    }
+    console.log(e.key);
   };
 
   useEffect(() => {

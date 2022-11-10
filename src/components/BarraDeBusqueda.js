@@ -6,13 +6,10 @@ import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
-
-const SearchAppBar = ({handleSearch}) => {
-  console.log(handleSearch)
+const SearchAppBar = ({handleSearch, search}) => {
 
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
-  
     backgroundColor: "#ecf8d4",
     "&:hover": {
       backgroundColor: "#ecf8d4",
@@ -51,7 +48,7 @@ const SearchAppBar = ({handleSearch}) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Toolbar>
+      <Toolbar onKeyPress={handleSearch} value={search}>
         <IconButton
           size="large"
           edge="start"

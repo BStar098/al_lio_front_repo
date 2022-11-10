@@ -10,7 +10,7 @@ import img from "../imagenes/Logo_pagina.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../state/users";
 
-const Navbar = (search, handleSearch) => {
+const Navbar = ({search, handleSearch}) => {
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.users.userData);
 
@@ -24,7 +24,7 @@ const Navbar = (search, handleSearch) => {
         <img src={img} alt="alLioLogo" className="imagen" />
       </Link>
     
-      <BarraDeBusqueda className="barrita-de-busqueda" handleSearch={handleSearch}/>
+      <BarraDeBusqueda className="barrita-de-busqueda" handleSearch={handleSearch} search={search} />
 
       <div className="caja-botones">
         {!usuario.name ? (
