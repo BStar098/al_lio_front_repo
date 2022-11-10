@@ -28,3 +28,10 @@
   display: flex;
   justify-content: center;
 }
+
+.footer {
+  background-color: #ead7c3;
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+}
