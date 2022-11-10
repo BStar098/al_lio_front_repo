@@ -10,6 +10,8 @@ import Cart from "./components/Cart";
 import AddProduct from "./components/AddProduct";
 import { useDispatch } from "react-redux";
 import { getAllProducts } from "./state/products";
+import CartTest from "./components/CartTest";
+
 
 function App() {
   const [search, setSearch] = useState("");
@@ -31,8 +33,10 @@ function App() {
       <Navbar search={search} handleSearch={handleSearch} />
       <div className="bodyContainer">
         <Routes>
+          <Route path="/test" element={<CartTest />}></Route>
           <Route path="/" element={<Main />}></Route>
           <Route path="/:id" element={<Item />}></Route>
+
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/products" element={<Grid search={search} />}></Route>
           <Route path="/login" element={<Login />}></Route>
