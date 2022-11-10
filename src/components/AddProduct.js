@@ -30,7 +30,6 @@ function AddProduct() {
   const submitHandler = () => {
     state.img[0] = images.image1;
     state.img[1] = images.image2;
-    console.log(state)
     productsRequests
       .post("/", state)
       .then((product) => {
@@ -75,9 +74,9 @@ function AddProduct() {
         <label>
           Categoria:
           <select id="select" className="category" onChange={inputHandler}>
-            <option value="remeras">Remera</option>
-            <option value="buzos">Buzo</option>
-            <option value="pantalones">Pantalon</option>
+            <option value="remera">Remera</option>
+            <option value="buzo">Buzo</option>
+            <option value="pantalon">Pantalon</option>
           </select>
         </label>
         <label>

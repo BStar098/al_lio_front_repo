@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import "../styles/Grid/style.css";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getAllProducts, searchProducts } from "../state/products";
+import { searchProducts } from "../state/products";
 import { useSelector } from "react-redux";
 
 function Grid({ search }) {
@@ -14,7 +14,7 @@ function Grid({ search }) {
 
   useEffect(() => {
     if (category) {
-      if (search) dispatch(searchProducts({ name: search, category }));
+      if (search) dispatch(searchProducts({ name: search, category:category }));
       dispatch(searchProducts({ category: category }));
     }
   }, [category, search]);

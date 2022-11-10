@@ -21,6 +21,7 @@ export const addProductToCart = createAsyncThunk(
       });
   }
 );
+
 export const removeProductFromCart = createAsyncThunk(
   "REMOVE_FROM_CART",
   (productIdAndUserId) => {

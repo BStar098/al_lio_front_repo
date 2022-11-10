@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getOneProduct } from "../state/products";
+import { createReview, getAllReviews } from "../state/reviews";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
@@ -16,33 +17,37 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "../styles/Item/styles.css";
 
 function Item() {
-  const [talle, setTalle] = useState("");
+  const dispatch = useDispatch();
   const params = useParams();
   const id = params.id;
+  const [talle, setTalle] = useState("");
+  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState(null)
 
-  const dispatch = useDispatch();
-  const clothes = useSelector((state) => state.products.oneProduct);
+  const clothes = useSelector(state => state.products.oneProduct);
+  const reviews = useSelector(state => state.reviews.reviews);
+  const user = useSelector(state => state.users.userData);
+
   useEffect(() => {
-    dispatch(getOneProduct(id)).then(() => {
-      console.log(clothes);
-    });
+    dispatch(getOneProduct(id));
+    dispatch(getAllReviews(id));
   }, [id]);
 
-  let reviews = [
-    { rating: "5", comment: "Buena calidad" },
-    {
-      rating: "4",
-      comment: "Tal cual la descripcion. Llego rapido",
-    },
-    { rating: "4", comment: "Estoy conforme con la compra" },
-    { rating: "3", comment: "Todo ok!!" },
-  ];
-
-  let handleChange = (event) => {
+  let handleChange = event => {
     setTalle(event.target.value);
   };
 
-  let handleCarrito = () => {};
+  const inputHandler = e => {
+    setComment(e.target.value);
+  };
+
+  const ratingHandler = (e, newValue) => {
+    setRating(newValue);
+  }
+
+  const handleReview = () => {
+    dispatch(createReview({userId:user.id, productId:id, comments:comment, rating:rating}));
+  };
 
   return (
     <div>
@@ -52,7 +57,7 @@ function Item() {
             <div className="divCentrado">
               <img
                 className="fotoItem"
-                src={`${clothes.img[0]}`}
+                src={clothes.img ? `${clothes.img[0]}` : ""}
                 alt="Producto"
               />
             </div>
@@ -86,7 +91,7 @@ function Item() {
 
               <p style={{ fontSize: "1.5rem" }}>Precio: ${clothes.price}</p>
               <Button
-                onClick={handleCarrito}
+                onClick={addCarrito}
                 startIcon={<AddShoppingCartIcon />}
                 style={{
                   backgroundColor: "#ead7c3",
@@ -105,10 +110,28 @@ function Item() {
         {reviews.map((review, i) => (
           <div key={i} className="divReview">
             <Rating name="read-only" value={review.rating} readOnly />
-            <p>{review.comment}</p>
+            <p>{review.comments}</p>
           </div>
         ))}
       </div>
+      {user.name ? (
+        <div className="formContainer">
+          <h2 className="addProductTitle">Opinar sobre este producto</h2>
+          <div className="inputsContainer">
+            <Rating
+              name="simple-controlled"
+              value={rating}
+              onChange={ratingHandler}
+            />
+            <textarea
+              onChange={inputHandler}
+              id="description"
+              placeholder={`Comentanos tu opinion sobre la prenda `}
+            ></textarea>
+            <button onClick={handleReview}>ENVIAR</button>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
