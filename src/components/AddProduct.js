@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/AddProduct/style.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { productsRequests } from "../state/products"
+import { productsRequests } from "../state/products";
 function AddProduct() {
   const navigate = useNavigate();
   const [images, setImages] = useState({ image1: "", image2: "" });
@@ -30,7 +30,7 @@ function AddProduct() {
   const submitHandler = () => {
     state.img[0] = images.image1;
     state.img[1] = images.image2;
-    console.log(state)
+    console.log(state);
     productsRequests
       .post("/", state)
       .then((product) => {
@@ -75,9 +75,9 @@ function AddProduct() {
         <label>
           Categoria:
           <select id="select" className="category" onChange={inputHandler}>
-            <option value="remeras">Remera</option>
-            <option value="buzos">Buzo</option>
-            <option value="pantalones">Pantalon</option>
+            <option value="remera">Remera</option>
+            <option value="buzo">Buzo</option>
+            <option value="pantalon">Pantalon</option>
           </select>
         </label>
         <label>
