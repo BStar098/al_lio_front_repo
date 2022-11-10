@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/AddProduct/style.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { productsRequests } from "../state/products"
+import { productsRequests } from "../state/products";
 function AddProduct() {
   const navigate = useNavigate();
   const [images, setImages] = useState({ image1: "", image2: "" });
