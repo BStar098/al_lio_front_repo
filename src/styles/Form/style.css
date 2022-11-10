@@ -4,9 +4,11 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 130%;
-  color: rgb(0, 0, 0);
+  color: rgb(73, 64, 64);
   text-align: center;
   text-decoration: underline;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 .container {

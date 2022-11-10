@@ -4,8 +4,9 @@ import axios from "axios";
 const initialState = {
   isLoading: true,
   products: [],
+  oneProduct: {},
+  filteredProducts: []
 };
-
 
 export const productsRequests = axios.create({
   baseURL: "http://localhost:3001/api/products",
@@ -40,13 +41,29 @@ export const postOneProduct = createAsyncThunk(
 );
 export const searchProducts = createAsyncThunk(
   "SEARCH_PRODUCTS",
-  (dataToFind) => {
-    console.log(dataToFind)
+  (name) => {
+    // para buscar por categoria especificar la prop type con el valor 'cat' y la prop category con la categoria deseada
+    //para buscar por nombre de producto especificar la prop name con el nombre deseado
     return productsRequests
-      .get("/search", dataToFind)
-      .then((product) => {
-        console.log(product)
-        return product.data})
+      .get(`/search/name/${name}`)
+      .then((products) => {
+        return products.data;
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  }
+);
+export const searchCatProducts = createAsyncThunk(
+  "SEARCH_CAT_PRODUCTS",
+  (category) => {
+    // para buscar por categoria especificar la prop type con el valor 'cat' y la prop category con la categoria deseada
+    //para buscar por nombre de producto especificar la prop name con el nombre deseado
+    return productsRequests
+      .get(`/search/cat/${category}`)
+      .then((products) => {
+        return products.data;
+      })
       .catch((error) => {
         throw new Error(error.message);
       });
@@ -73,7 +90,7 @@ const productsSlice = createSlice({
     },
     [getOneProduct.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.products = action.payload;
+      state.oneProduct = action.payload;
     },
     [getOneProduct.rejected]: (state) => {
       state.isLoading = false;
@@ -96,6 +113,16 @@ const productsSlice = createSlice({
       state.products = action.payload;
     },
     [searchProducts.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [searchCatProducts.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [searchCatProducts.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.filteredProducts = action.payload;
+    },
+    [searchCatProducts.rejected]: (state) => {
       state.isLoading = false;
     },
   },

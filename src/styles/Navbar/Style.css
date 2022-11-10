@@ -32,3 +32,8 @@ a {
   margin-right: 10%;
   width: fit-content;
 }
+
+.barrita-de-busqueda {
+  border-radius: 10px;
+  margin-left: 3%;
+}

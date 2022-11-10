@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-// import { useParams } from "react-router";
-// import axios from "axios";
+import { getOneProduct } from "../state/products";
+import { createReview, getAllReviews } from "../state/reviews";
+import { addProductToCart } from "../state/cart";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
 import {
   Button,
   Grid,
@@ -14,44 +18,42 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "../styles/Item/styles.css";
 
 function Item() {
+  const dispatch = useDispatch();
   const [talle, setTalle] = useState("");
-  //   const params = useParams();
-  //   const id = params.id;
+  const params = useParams();
+  const id = params.id;
+  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState(null)
 
-  //   useEffect(() => {
-  //     axios
-  //       .get("")
-  //       .then((res) => res.data)
-  //       .then((data) => {
-  //         setPrenda(data);
-  //       })
-  //       .catch(() => console.error("No se encontró el producto"));
-  //   }, []);
+  const product = useSelector((state) => state.products.oneProduct);
+  const reviews = useSelector(state => state.reviews.reviews);
+  const user = useSelector(state => state.users.userData);
+  const userId = user.id
 
-  let prenda = {
-    name: "Remera Mockup",
-    description: "Remera cuello redondo con estampa",
-    imgFront:
-      "https://img.freepik.com/psd-gratis/maqueta-vista-frontal-modelo-camiseta-negra_125540-1059.jpg?w=1380&t=st=1667417847~exp=1667418447~hmac=6b462698be6e5f34d702992e6108e90a75d3a938223b83801d31a9e6148b990f",
-    price: 5000,
-    size: ["S", "M", "L", "XL"],
-    color: ["negro"],
-    rating: 3.5,
+  useEffect(() => {
+    dispatch(getOneProduct(id));
+    dispatch(getAllReviews(id));
+  }, [id]);
+
+  let handleChange = event => {
+    setTalle(event.target.value);
+  }; // Esto guarda el talle seleccionado
+
+  const inputHandler = e => {
+    setComment(e.target.value);
   };
 
-  let reviews = [
-    { rating: "5", comment: "Buena calidad" },
-    {
-      rating: "4",
-      comment: "Tal cual la descripcion. Llego rapido",
-    },
-    { rating: "4", comment: "Estoy conforme con la compra" },
-    { rating: "3", comment: "Todo ok!!" },
-  ];
+  const ratingHandler = (e, newValue) => {
+    setRating(newValue);
+  }
 
-  let handleChange = (event) => {
-    setTalle(event.target.value);
-    console.log(event.target.value)
+  const handleReview = () => {
+    dispatch(createReview({userId:user.id, productId:id, comments:comment, rating:rating}));
+  }
+
+  let addCarrito = () => {
+    dispatch(addProductToCart({ productId: id, userId: userId, quantity: 1 }));
+    alert("La prenda fue agregada al carrito");
   };
 
   return (
@@ -62,24 +64,24 @@ function Item() {
             <div className="divCentrado">
               <img
                 className="fotoItem"
-                src={`${prenda.imgFront}`}
+                src={product.img ? `${product.img[0]}` : ""}
                 alt="Producto"
               />
             </div>
           </Grid>
           <Grid item xs={6}>
             <div className="topDiv">
-              <h1>{prenda.name}</h1>
+              <h1>{product.name}</h1>
               <p>
                 <Rating
                   name="read-only"
-                  value={prenda.rating}
+                  value={product.rating ? product.rating : 0}
                   precision={0.5}
                   readOnly
                 />
               </p>
-              <p>Detalle: {prenda.description}</p>
-              <p>Color: {prenda.color}</p>
+              <p>Detalle: {product.description}</p>
+              <p>Color: {product.colour}</p>
 
               <FormControl sx={{ m: 1, minWidth: 100 }}>
                 <InputLabel id="demo-simple-select-label">Talle:</InputLabel>
@@ -90,17 +92,13 @@ function Item() {
                   label="Age"
                   onChange={handleChange}
                 >
-                  {prenda.size.map((talle, i) => (
-                    <MenuItem key={i} value={talle}>
-                      {talle}
-                    </MenuItem>
-                  ))}
+                  <MenuItem value={product.size}>{product.size}</MenuItem>
                 </Select>
               </FormControl>
 
-              <p style={{ fontSize: "1.5rem" }}>Precio: ${prenda.price}</p>
+              <p style={{ fontSize: "1.5rem" }}>Precio: ${product.price}</p>
               <Button
-                onClick={""}
+                onClick={addCarrito}
                 startIcon={<AddShoppingCartIcon />}
                 style={{
                   backgroundColor: "#ead7c3",
@@ -119,10 +117,28 @@ function Item() {
         {reviews.map((review, i) => (
           <div key={i} className="divReview">
             <Rating name="read-only" value={review.rating} readOnly />
-            <p>{review.comment}</p>
+            <p>{review.comments}</p>
           </div>
         ))}
       </div>
+      {user.name ? (
+        <div className="formContainer">
+          <h2 className="addProductTitle">Opinar sobre este producto</h2>
+          <div className="inputsContainer">
+            <Rating
+              name="simple-controlled"
+              value={rating}
+              onChange={ratingHandler}
+            />
+            <textarea
+              onChange={inputHandler}
+              id="description"
+              placeholder={`Comentanos tu opinion sobre la prenda `}
+            ></textarea>
+            <button onClick={handleReview}>ENVIAR</button>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

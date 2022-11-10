@@ -4,7 +4,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
 import BarraDeBusqueda from "./BarraDeBusqueda";
 import "../styles/Navbar/Style.css";
 import img from "../imagenes/Logo_pagina.png";
@@ -12,9 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../state/users";
 import AddIcon from "@mui/icons-material/Add";
 
-const Navbar = (search, handleSearch) => {
+const Navbar = ({search, handleSearch}) => {
   const dispatch = useDispatch();
   const usuario = useSelector((state) => state.users.userData);
+
   const handleLogOut = () => {
     dispatch(logOut());
   };
@@ -24,8 +24,8 @@ const Navbar = (search, handleSearch) => {
       <Link to="/">
         <img src={img} alt="alLioLogo" className="imagen" />
       </Link>
-
-      <BarraDeBusqueda className="barrita-de-busqueda" />
+    
+      <BarraDeBusqueda className="barrita-de-busqueda" handleSearch={handleSearch} search={search} />
 
       <div className="caja-botones">
         {!usuario.name ? (
@@ -114,6 +114,7 @@ const Navbar = (search, handleSearch) => {
                 Salir
               </Button>
             </Link>
+
           </>
         )}
       </div>
