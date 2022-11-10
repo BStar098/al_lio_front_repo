@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getOneProduct } from "../state/products";
+import { addProductToCart } from "../state/cart";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
@@ -16,17 +17,17 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "../styles/Item/styles.css";
 
 function Item() {
+  const dispatch = useDispatch();
   const [talle, setTalle] = useState("");
   const params = useParams();
   const id = params.id;
 
-  const dispatch = useDispatch();
-  const clothes = useSelector((state) => state.products.oneProduct);
+  const product = useSelector((state) => state.products.oneProduct);
   useEffect(() => {
-    dispatch(getOneProduct(id)).then(() => {
-      console.log(clothes);
-    });
-  }, [id]);
+    dispatch(getOneProduct(id)).then(() => {});
+  }, [id]); //busca el producto mediante el id
+
+  const userId = useSelector((estado) => estado.users.userData.id);
 
   let reviews = [
     { rating: "5", comment: "Buena calidad" },
@@ -40,9 +41,12 @@ function Item() {
 
   let handleChange = (event) => {
     setTalle(event.target.value);
-  };
+  }; // Esto guarda el talle seleccionado
 
-  let handleCarrito = () => {};
+  let addCarrito = () => {
+    dispatch(addProductToCart({ productId: id, userId: userId, quantity: 1 }));
+    alert("La prenda fue agregada al carrito");
+  };
 
   return (
     <div>
@@ -52,24 +56,24 @@ function Item() {
             <div className="divCentrado">
               <img
                 className="fotoItem"
-                src={`${clothes.img[0]}`}
+                src={product.img ? `${product.img[0]}` : ""}
                 alt="Producto"
               />
             </div>
           </Grid>
           <Grid item xs={6}>
             <div className="topDiv">
-              <h1>{clothes.name}</h1>
+              <h1>{product.name}</h1>
               <p>
                 <Rating
                   name="read-only"
-                  value={clothes.rating}
+                  value={product.rating ? product.rating : 0}
                   precision={0.5}
                   readOnly
                 />
               </p>
-              <p>Detalle: {clothes.description}</p>
-              <p>Color: {clothes.colour}</p>
+              <p>Detalle: {product.description}</p>
+              <p>Color: {product.colour}</p>
 
               <FormControl sx={{ m: 1, minWidth: 100 }}>
                 <InputLabel id="demo-simple-select-label">Talle:</InputLabel>
@@ -80,13 +84,13 @@ function Item() {
                   label="Age"
                   onChange={handleChange}
                 >
-                  <MenuItem value={clothes.size}>{clothes.size}</MenuItem>
+                  <MenuItem value={product.size}>{product.size}</MenuItem>
                 </Select>
               </FormControl>
 
-              <p style={{ fontSize: "1.5rem" }}>Precio: ${clothes.price}</p>
+              <p style={{ fontSize: "1.5rem" }}>Precio: ${product.price}</p>
               <Button
-                onClick={handleCarrito}
+                onClick={addCarrito}
                 startIcon={<AddShoppingCartIcon />}
                 style={{
                   backgroundColor: "#ead7c3",
