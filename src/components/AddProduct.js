@@ -30,7 +30,6 @@ function AddProduct() {
   const submitHandler = () => {
     state.img[0] = images.image1;
     state.img[1] = images.image2;
-    console.log(state);
     productsRequests
       .post("/", state)
       .then((product) => {

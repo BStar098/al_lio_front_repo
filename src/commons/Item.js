@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getOneProduct } from "../state/products";
+import { createReview, getAllReviews } from "../state/reviews";
 import { addProductToCart } from "../state/cart";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -21,27 +22,34 @@ function Item() {
   const [talle, setTalle] = useState("");
   const params = useParams();
   const id = params.id;
+  const [talle, setTalle] = useState("");
+  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState(null)
 
   const product = useSelector((state) => state.products.oneProduct);
+  const reviews = useSelector(state => state.reviews.reviews);
+  const user = useSelector(state => state.users.userData);
+  const userId = user.id
+
   useEffect(() => {
-    dispatch(getOneProduct(id)).then(() => {});
-  }, [id]); //busca el producto mediante el id
+    dispatch(getOneProduct(id));
+    dispatch(getAllReviews(id));
+  }, [id]);
 
-  const userId = useSelector((estado) => estado.users.userData.id);
-
-  let reviews = [
-    { rating: "5", comment: "Buena calidad" },
-    {
-      rating: "4",
-      comment: "Tal cual la descripcion. Llego rapido",
-    },
-    { rating: "4", comment: "Estoy conforme con la compra" },
-    { rating: "3", comment: "Todo ok!!" },
-  ];
-
-  let handleChange = (event) => {
+  let handleChange = event => {
     setTalle(event.target.value);
   }; // Esto guarda el talle seleccionado
+
+  const inputHandler = e => {
+    setComment(e.target.value);
+  };
+
+  const ratingHandler = (e, newValue) => {
+    setRating(newValue);
+  }
+
+  const handleReview = () => {
+    dispatch(createReview({userId:user.id, productId:id, comments:comment, rating:rating}));
 
   let addCarrito = () => {
     dispatch(addProductToCart({ productId: id, userId: userId, quantity: 1 }));
@@ -109,10 +117,28 @@ function Item() {
         {reviews.map((review, i) => (
           <div key={i} className="divReview">
             <Rating name="read-only" value={review.rating} readOnly />
-            <p>{review.comment}</p>
+            <p>{review.comments}</p>
           </div>
         ))}
       </div>
+      {user.name ? (
+        <div className="formContainer">
+          <h2 className="addProductTitle">Opinar sobre este producto</h2>
+          <div className="inputsContainer">
+            <Rating
+              name="simple-controlled"
+              value={rating}
+              onChange={ratingHandler}
+            />
+            <textarea
+              onChange={inputHandler}
+              id="description"
+              placeholder={`Comentanos tu opinion sobre la prenda `}
+            ></textarea>
+            <button onClick={handleReview}>ENVIAR</button>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
