@@ -49,6 +49,7 @@ function Item() {
 
   const handleReview = () => {
     dispatch(createReview({userId:user.id, productId:id, comments:comment, rating:rating}));
+  }
 
   let addCarrito = () => {
     dispatch(addProductToCart({ productId: id, userId: userId, quantity: 1 }));
