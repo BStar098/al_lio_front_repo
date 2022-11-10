@@ -7,6 +7,7 @@ import Main from "./components/Main";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Item from "./commons/Item";
+import CartTest from "./components/CartTest";
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
       <Navbar />
       <div className="bodyContainer">
         <Routes>
+          <Route path="/test" element={<CartTest />}></Route>
           <Route path="/" element={<Main />}></Route>
-          <Route path="/:id" element={<Item/>}></Route>
+          <Route path="/:id" element={<Item />}></Route>
           <Route
             path="/products"
             element={<Grid clothes={clothesArray} />}
