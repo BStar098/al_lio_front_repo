@@ -51,6 +51,9 @@ const Main = () => {
           </div>
         </div>
       </div>
+      <div className="footer">
+        Al lio © 2022. Todos los derechos reservados.
+      </div>
     </div>
   );
 };
