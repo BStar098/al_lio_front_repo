@@ -6,7 +6,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import BarraDeBusqueda from "./BarraDeBusqueda";
 import "../styles/Navbar/Style.css";
-import img from "../imagenes/Logo_pagina.png";
+import img from "../assets/imagenes/Logo_pagina.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../state/users";
 import AddIcon from "@mui/icons-material/Add";

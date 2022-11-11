@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import bannerColeccion from "../imagenes/bannerColeccion.png";
-import remera from "../imagenes/remera.png";
-import pantalon from "../imagenes/pantalon.png";
-import abrigo from "../imagenes/abrigo.png";
+import bannerColeccion from "../assets/imagenes/bannerColeccion.png";
+import remera from "../assets/imagenes/remera.png";
+import pantalon from "../assets/imagenes/pantalon.png";
+import abrigo from "../assets/imagenes/abrigo.png";
 import "../styles/Main/styles.css";
 
 const Main = () => {
