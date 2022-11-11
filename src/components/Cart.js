@@ -65,7 +65,6 @@ const Cart = () => {
         </Button>
 
         <Button
-          onClick={comprar}
           style={{
             fontSize: "110%",
             fontWeight: "500",
