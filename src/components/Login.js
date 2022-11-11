@@ -31,32 +31,9 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
       });
+    
   };
 
-  /*const [miLogin, setMiLogin] = useState("false");
-  const [usuario, setUsuario] = useState(""); //Captura el nombre de usuario
-  const [password, setPassword] = useState(""); //Captura la contraseña
-
-  function iniciarSesion(e) {
-    e.preventDefault();
-    var txtusuario = document.getElementById("txtusuario").value; //Capturo si hay algo escrito
-    var txtpassword = document.getElementById("txtpassword").value;
-    if (txtusuario.length === 0 || txtpassword.length === 0) {
-      alert("Complete los datos faltantes!!!");
-    } else {
-      if (usuario === "tiago" && password === "123") {
-        setMiLogin("true");
-        document.getElementById("form_login").style.display = "none";
-      } else {
-        setMiLogin("false");
-        alert("Error de usuario y/o contraseña!!");
-        document.getElementById("txtusuario").value = "";
-        document.getElementById("txtpassword").value = "";
-        document.getElementById("txtpassword").focus();
-      }
-    }
-  }
-*/
   return (
     <Box
       component="form"

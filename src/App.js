@@ -10,11 +10,14 @@ import Cart from "./components/Cart";
 import AddProduct from "./components/AddProduct";
 import { useDispatch } from "react-redux";
 import { getAllProducts } from "./state/products";
+import MiPerfil from "./components/MiPerfil";
+import {usersRequests} from "./state/users";
 import CartTest from "./components/CartTest";
 
 
 function App() {
   const [search, setSearch] = useState("");
+  const [users, setUsers] = useState([])
   const dispatch = useDispatch();
 
   const handleSearch = e => {
@@ -26,6 +29,9 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllProducts());
+    usersRequests.get("/").then(users=>{
+      setUsers(users.data)
+    })
   }, []);
 
   return (
@@ -43,6 +49,7 @@ function App() {
           <Route path="/signup" element={<Register />}></Route>
           <Route path="/add" element={<AddProduct />}></Route>
           <Route path="/cat/:category" element={<Grid />}></Route>
+          <Route path="/profile" element={<MiPerfil users={users} setUsers={setUsers}/>}></Route>
         </Routes>
       </div>
     </div>

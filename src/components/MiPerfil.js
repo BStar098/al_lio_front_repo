@@ -1,50 +1,36 @@
-import { NavLink } from "react-router-dom";
 import React from "react";
-import { Button } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
+import {usersRequests} from "../state/users";
 
-const MiPerfil = (props) => {
-  function cerrarSesion() {
-    document.getElementById("caja_menu").style.display = "none";
-    document.getElementById("form_login").style.display = "block";
-    document.getElementById("txtusuario").value = "";
-    document.getElementById("txtpassword").value = "";
-    document.getElementById("txtusuario").focus();
-  }
+const MiPerfil = ({ users, setUsers }) => {
+
+const setAdmin = (id)=>{
+  usersRequests.put(`/admin/${id}`).then(
+    usersRequests.get("/").then(users=>{
+      setUsers(users.data)
+    })
+  )
+}
+
+const setUser = (id)=>{
+  usersRequests.put(`/user/${id}`).then(
+    usersRequests.get("/").then(users=>{
+      setUsers(users.data)
+    })
+  )
+}
 
   return (
-    <>
-      <div id="caja_menu" style={{ textAlign: "left" }}>
-        <h1 className="vista-usuario">Bienvenido Usuario : {props.usuario}</h1>
-        <Button
-          startIcon={<PersonIcon />}
-          className="Boton"
-          style={{
-            backgroundColor: "#ead7c3",
-            color: "black",
-            fontFamily: "Canaro",
-          }}
-        >
-          {props.usuario}
-        </Button>
-        <nav className="" style={{ marginTop: 20 }}>
-          <div className="">
-            <div className="" id="">
-              <div className="">
-                <Button
-                  className=""
-                  style={{ color: "blue" }}
-                  href=" "
-                  onClick={cerrarSesion}
-                >
-                  Cerrar Sesion
-                </Button>
-              </div>
-            </div>
-          </div>
-        </nav>
+    <div>
+      {users.length ? 
+      users.map(user => 
+      <div key={user.id}>
+        <p>Nombre de usuario: <strong>{user.name}</strong> -Tipo: <strong>{user.type}</strong></p>
+        <button onClick={()=>setAdmin(user.id)}>setAdmin</button>
+        <button onClick={()=>setUser(user.id)}>setUser</button>
       </div>
-    </>
+      ) 
+      : null}
+    </div>
   );
 };
 
