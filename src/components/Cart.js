@@ -27,7 +27,10 @@ const Cart = () => {
     axios.post("http://localhost:3001/api/checkout/confirm", {userId:userId})
     .then(()=>{
       axios.post("http://localhost:3001/api/checkout/checkout", {userId:userId})
-      .then(result=>console.log(result))
+      .then(result=>{
+      console.log(result)
+      navigate("/checkout")
+      })
     })
   }
 
@@ -62,6 +65,7 @@ const Cart = () => {
         </Button>
 
         <Button
+          onClick={comprar}
           style={{
             fontSize: "110%",
             fontWeight: "500",

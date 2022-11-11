@@ -13,6 +13,7 @@ import { getAllProducts } from "./state/products";
 import MiPerfil from "./components/MiPerfil";
 import { usersRequests } from "./state/users";
 import CartTest from "./components/CartTest";
+import Checkout from "./components/Checkout";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -51,6 +52,7 @@ function App() {
             path="/profile"
             element={<MiPerfil users={users} setUsers={setUsers} />}
           ></Route>
+          <Route path="/checkout" element={<Checkout />}></Route>
         </Routes>
       </div>
     </div>
