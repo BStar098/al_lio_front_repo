@@ -6,27 +6,25 @@
   display: flex;
   justify-content: center;
   margin: 3% 3% 3% 3%;
-  position: relative;
 }
 
 .fotoCategoria {
-  width: 400px;
+  max-width: 30%;
+  min-width: 200px;
   border-radius: 2%;
+}
+.catPicture {
+  width: 100%
 }
 
 .containerCat {
   display: flex;
-  justify-content: space-between;
-  position: relative;
-}
-
-.margenCat {
-  margin: 4.5%;
+  justify-content: center;
+  gap: 2%
 }
 
 .titCat {
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 
 .footer {
@@ -34,4 +32,14 @@
   height: 40px;
   text-align: center;
   padding-top: 10px;
+}
+
+@media screen and (max-width: 700px) {
+  .containerCat {
+    flex-direction: column;
+    align-items: center;
+  }
+  .fotoCategoria {
+    max-width: 70%;
+  }
 }

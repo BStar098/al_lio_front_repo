@@ -28,4 +28,16 @@
   width: 100%;
   justify-content: center;
   margin-bottom: 2%;
+}
+.cartButtonsContainer > button {
+  box-shadow: 3px 3px 3px rgba(111, 102, 92, 0.5411764706);
+  transition: 0.3s ease;
+}
+.cartButtonsContainer > button:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease;
+}
+.cartButtonsContainer > button:active {
+  transform: scale(0.9);
+  transition: 0.2s ease;
 }/*# sourceMappingURL=style.css.map */

@@ -19,38 +19,30 @@ const Main = () => {
         </Link>
       </div>
 
-      <div className="margenCat">
-        <div className="containerCat">
-          <div>
-            <Link to="/cat/remera">
-              <img src={remera} alt="Remeras" className="fotoCategoria"></img>
-            </Link>
-            <div className="titCat">
-              <p>REMERAS</p>
-            </div>
+      <div className="containerCat">
+        <Link className="fotoCategoria" to="/cat/remera">
+          <img className="catPicture" src={remera} alt="Remeras"></img>
+          <div className="titCat">
+            <p>REMERAS</p>
           </div>
-          <div>
-            <Link to="/cat/pantalon">
-              <img
-                src={pantalon}
-                alt="Pantalones"
-                className="fotoCategoria"
-              ></img>
-            </Link>
-            <div className="titCat">
-              <p>PANTALONES</p>
-            </div>
+        </Link>
+
+        <Link className="fotoCategoria" to="/cat/pantalon">
+          <img className="catPicture" src={pantalon} alt="Pantalones"></img>
+          <div className="titCat">
+            <p>PANTALONES</p>
           </div>
-          <div>
-            <Link to="/cat/buzo">
-              <img src={abrigo} alt="Abrigos" className="fotoCategoria"></img>
-            </Link>
-            <div className="titCat">
-              <p>BUZOS</p>
-            </div>
+        </Link>
+
+        <Link className="fotoCategoria" to="/cat/buzo">
+          <img className="catPicture" src={abrigo} alt="Abrigos"></img>
+
+          <div className="titCat">
+            <p>BUZOS</p>
           </div>
-        </div>
+        </Link>
       </div>
+
       <div className="footer">
         Al lio © 2022. Todos los derechos reservados.
       </div>
