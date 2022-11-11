@@ -53,7 +53,6 @@ function Item() {
 
   let addCarrito = () => {
     dispatch(addProductToCart({ productId: id, userId: userId, quantity: 1 }));
-    alert("La prenda fue agregada al carrito");
   };
 
   return (

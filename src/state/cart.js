@@ -19,13 +19,25 @@ export const getAllCartProducts = createAsyncThunk(
       .get(`/${userId}`)
       .then(async (cartItems) => {
         const finalCart = {};
-        const allProductsRequests = cartItems.data.map((el) =>
+        const allProductsRequests = {};
+        allProductsRequests.requests = cartItems.data.map((el) =>
           productsRequests.get(`/${el.productId}`)
         );
-        finalCart.products = await Promise.all(allProductsRequests)
+        const quantities = cartItems.data.map((el) => {
+          return { productId: el.productId, quantity: el.quantity };
+        });
+        finalCart.products = await Promise.all(allProductsRequests.requests)
           .then((products) => products)
           .then((products) => {
-            return products.map((el) => el.data);
+            const finalProducts = [];
+            for (let i = 0; i < products.length; i++) {
+              if (products[i].data.id === quantities[i].productId) {
+                console.log(finalProducts);
+                products[i].data.quantity = quantities[i].quantity;
+                finalProducts.push(products[i].data);
+              }
+            }
+            return finalProducts;
           });
         finalCart.finalPrice = cartItems.data.reduce(
           (initialValue, cartItem) => {
@@ -96,7 +108,7 @@ const cartSlice = createSlice({
     },
     [removeProductFromCart.fulfilled]: (state, action) => {
       state.isLoading = false;
-      alert(action.payload);
+      console.log(action.payload);
     },
     [removeProductFromCart.rejected]: (state) => {
       state.isLoading = false;
@@ -106,7 +118,7 @@ const cartSlice = createSlice({
     },
     [updateQuantityFromCart.fulfilled]: (state, action) => {
       state.isLoading = false;
-      alert(action.payload);
+      console.log(action.payload);
     },
     [updateQuantityFromCart.rejected]: (state) => {
       state.isLoading = false;
