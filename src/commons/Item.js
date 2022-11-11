@@ -23,36 +23,44 @@ function Item() {
   const params = useParams();
   const id = params.id;
   const [comment, setComment] = useState("");
-  const [rating, setRating] = useState(null)
+  const [rating, setRating] = useState(null);
 
   const product = useSelector((state) => state.products.oneProduct);
-  const reviews = useSelector(state => state.reviews.reviews);
-  const user = useSelector(state => state.users.userData);
-  const userId = user.id
+  const reviews = useSelector((state) => state.reviews.reviews);
+  const user = useSelector((state) => state.users.userData);
+  const userId = user.id;
 
   useEffect(() => {
     dispatch(getOneProduct(id));
     dispatch(getAllReviews(id));
   }, [id]);
 
-  let handleChange = event => {
+  let handleChange = (event) => {
     setTalle(event.target.value);
   }; // Esto guarda el talle seleccionado
 
-  const inputHandler = e => {
+  const inputHandler = (e) => {
     setComment(e.target.value);
   };
 
   const ratingHandler = (e, newValue) => {
     setRating(newValue);
-  }
+  };
 
   const handleReview = () => {
-    dispatch(createReview({userId:user.id, productId:id, comments:comment, rating:rating}));
-  }
+    dispatch(
+      createReview({
+        userId: user.id,
+        productId: id,
+        comments: comment,
+        rating: rating,
+      })
+    );
+  };
 
   let addCarrito = () => {
     dispatch(addProductToCart({ productId: id, userId: userId, quantity: 1 }));
+    alert(`Agregado con éxito`);
   };
 
   return (

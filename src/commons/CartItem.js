@@ -25,15 +25,11 @@ const CartItem = ({ productData }) => {
         <ExpandLess
           style={{ cursor: "pointer" }}
           onClick={() => {
-            dispatch(
-              updateQuantityFromCart({
-                productId,
-                userId,
-                quantity: productData.quantity + 1,
-              })
-            ).then(() => {
-              dispatch(getAllCartProducts(userId));
-            });
+            dispatch(addProductToCart({ productId, userId, quantity: 1 })).then(
+              () => {
+                dispatch(getAllCartProducts(userId));
+              }
+            );
           }}
         />
         <h2 className="itemTitle">{productData.quantity}</h2>
