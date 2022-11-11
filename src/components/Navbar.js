@@ -71,7 +71,7 @@ const Navbar = ({search, handleSearch}) => {
           </>
         ) : (
           <>
-            <Link to="">
+            <Link to="/profile">
               <Button
                 startIcon={<PersonIcon />}
                 className="Boton"
