@@ -20,7 +20,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
 
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     if (e.key === "Enter") {
       setSearch(e.target.value);
     }
@@ -29,7 +29,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllProducts());
-    usersRequests.get("/").then((users) => {
+    usersRequests.get("/").then(users => {
       setUsers(users.data);
     });
   }, []);
