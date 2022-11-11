@@ -21,6 +21,10 @@ const Cart = () => {
   const toTheLandingPage = () => {
     navigate("/");
   };
+
+  const comprar = () => {
+    navigate("/checkout");
+  };
   return (
     <div className="cartContainer">
       <div className="cartTitle">
@@ -52,6 +56,7 @@ const Cart = () => {
         </Button>
 
         <Button
+          onClick={comprar}
           style={{
             fontSize: "110%",
             fontWeight: "500",
