@@ -1,21 +1,64 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { productsRequests } from "./products";
 
 const initialState = {
   isLoading: true,
   cart: [],
+  finalPrice: 0,
 };
 
 export const cartRequests = axios.create({
   baseURL: "http://localhost:3001/api/cart",
 });
 
+export const getAllCartProducts = createAsyncThunk(
+  "GET_ENTIRE_CART",
+  (userId) => {
+    return cartRequests
+      .get(`/${userId}`)
+      .then(async (cartItems) => {
+        const finalCart = {};
+        const allProductsRequests = {};
+        allProductsRequests.requests = cartItems.data.map((el) =>
+          productsRequests.get(`/${el.productId}`)
+        );
+        const quantities = cartItems.data.map((el) => {
+          return { productId: el.productId, quantity: el.quantity };
+        });
+        finalCart.products = await Promise.all(allProductsRequests.requests)
+          .then((products) => products)
+          .then((products) => {
+            const finalProducts = [];
+            for (let i = 0; i < products.length; i++) {
+              if (products[i].data.id === quantities[i].productId) {
+                console.log(finalProducts);
+                products[i].data.quantity = quantities[i].quantity;
+                finalProducts.push(products[i].data);
+              }
+            }
+            return finalProducts;
+          });
+        finalCart.finalPrice = cartItems.data.reduce(
+          (initialValue, cartItem) => {
+            return initialValue + cartItem.finalPrice;
+          },
+          0
+        );
+        return finalCart;
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  }
+);
+
 export const addProductToCart = createAsyncThunk(
   "ADD_TO_CART",
   (itemAndUserData) => {
     return cartRequests
       .post("/", itemAndUserData)
-      .then((cart) => cart.data)
+      .then(() => "Added successfully!")
       .catch((error) => {
         throw new Error(error.message);
       });
@@ -24,9 +67,9 @@ export const addProductToCart = createAsyncThunk(
 
 export const removeProductFromCart = createAsyncThunk(
   "REMOVE_FROM_CART",
-  (productIdAndUserId) => {
+  (removeData) => {
     return cartRequests
-      .delete("/", productIdAndUserId)
+      .delete(`/${removeData.userId}/${removeData.productId}`)
       .then(() => "Removed successfully!")
       .catch((error) => {
         throw new Error(error.message);
@@ -38,14 +81,14 @@ export const updateQuantityFromCart = createAsyncThunk(
   (userItemAndQuantity) => {
     return cartRequests
       .put("/", userItemAndQuantity)
-      .then((product) => product.data)
+      .then(() => "Updated successfully!")
       .catch((error) => {
         throw new Error(error.message);
       });
   }
 );
 
-const productsSlice = createSlice({
+const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {},
@@ -55,7 +98,7 @@ const productsSlice = createSlice({
     },
     [addProductToCart.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.cart = action.payload;
+      alert(action.payload);
     },
     [addProductToCart.rejected]: (state) => {
       state.isLoading = false;
@@ -65,7 +108,7 @@ const productsSlice = createSlice({
     },
     [removeProductFromCart.fulfilled]: (state, action) => {
       state.isLoading = false;
-      alert(action.payload);
+      console.log(action.payload);
     },
     [removeProductFromCart.rejected]: (state) => {
       state.isLoading = false;
@@ -75,12 +118,22 @@ const productsSlice = createSlice({
     },
     [updateQuantityFromCart.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.cart = action.payload;
+      console.log(action.payload);
     },
     [updateQuantityFromCart.rejected]: (state) => {
+      state.isLoading = false;
+    },
+    [getAllCartProducts.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getAllCartProducts.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.cart = action.payload;
+    },
+    [getAllCartProducts.rejected]: (state) => {
       state.isLoading = false;
     },
   },
 });
 
-export default productsSlice.reducer;
+export default cartSlice.reducer;

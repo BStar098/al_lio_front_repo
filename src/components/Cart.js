@@ -1,70 +1,73 @@
-import Box from "@mui/material/Box";
-import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import DeleteIcon from '@mui/icons-material/Delete';
-import PlusOneIcon from '@mui/icons-material/PlusOne';
-import LocalMallIcon from '@mui/icons-material/LocalMall';
-import DeleteSweepOutlinedIcon from '@mui/icons-material/DeleteSweepOutlined';
-import Cartitem from "../commons/Cart-item";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
+import Cartitem from "../commons/CartItem";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import "../styles/Cart/style.css";
+import { getAllCartProducts } from "../state/cart";
+import { useNavigate } from "react-router-dom";
 
-const carrito = () => {
-    // const cartHandler = () => {
-    //     usersRequests.post("/cart", {});
-    //   };
-   
+const Cart = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.users.userData.id);
+  const cartItems = useSelector((state) => state.cart.cart);
 
-    return (
-    <Box>   
-    <div class="caja-de-carrito">
-       <div class="titulo-carrito">
-        
-           <h2>MI CARRITO</h2>
-           </div>
-          <div id="carrito-contenedor">
-             
-             <div class="botones">
-             <Cartitem />
-                   <Button style={{color:"black"}}>
-                    <PlusOneIcon />
-                   </Button>
+  useEffect(() => {
+    if (userId) dispatch(getAllCartProducts(userId));
+  }, []);
 
-                   <Button style={{color:"black"}}>
-                   <DeleteIcon />
-                   </Button>
-               </div> 
-           </div>
-        
-           
-           <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
-           
+  const toTheLandingPage = () => {
+    navigate("/");
+  };
+  return (
+    <div className="cartContainer">
+      <div className="cartTitle">
+        <h1>Tu carrito </h1>
+      </div>
+      <div className="cartItems">
+        {cartItems.products
+          ? cartItems.products.map((el) => <Cartitem productData={el} userId />)
+          : ""}
+      </div>
+      <h1 className="finalPrice">
+        Precio total: $<span id="precioTotal">{cartItems.finalPrice}</span>
+      </h1>
+      <div className="cartButtonsContainer">
+        <Button
+          onClick={toTheLandingPage}
+          style={{
+            fontSize: "110%",
+            fontWeight: "500",
+            background: "#ead7c3",
+            width: "15%",
+            color: "black",
+            fontFamily: "Canaro",
+          }}
+          className="cartButton"
+        >
+          Volver al Inicio
+          <LogoutIcon />
+        </Button>
 
-        <div>
-        <Link to="/">
-           <Button>
-            Salir
-            <LogoutIcon />
-           </Button>
-        </Link>
-
-           <Button>
-            Vaciar Carrito
-            <DeleteSweepOutlinedIcon />
-           </Button>
-
-           <Button>
-            Comprar
-            <LocalMallIcon />
-           </Button>
-        </div>
-       
-   </div>
-   </Box>
-    
-    )
-
+        <Button
+          style={{
+            fontSize: "110%",
+            fontWeight: "500",
+            background: "#ead7c3",
+            width: "15%",
+            color: "black",
+            fontFamily: "Canaro",
+          }}
+          className="cartButton"
+        >
+          Finalizar Compra
+          <LocalMallIcon />
+        </Button>
+      </div>
+    </div>
+  );
 };
 
-
-export default carrito;
-
+export default Cart;

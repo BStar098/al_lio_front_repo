@@ -9,6 +9,7 @@ import "../styles/Navbar/Style.css";
 import img from "../imagenes/Logo_pagina.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../state/users";
+import AddIcon from "@mui/icons-material/Add";
 
 const Navbar = ({search, handleSearch}) => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const Navbar = ({search, handleSearch}) => {
 
       <div className="caja-botones">
         {!usuario.name ? (
-          <>
+         <>
             <Link to="/cart">
               <Button
                 startIcon={<ShoppingCartIcon />}
@@ -81,9 +82,10 @@ const Navbar = ({search, handleSearch}) => {
                   fontFamily: "Canaro",
                 }}
               >
-                Mi perfil
+                {usuario.name}
               </Button>
             </Link>
+
             <Link to="/cart">
               <Button
                 startIcon={<ShoppingCartIcon />}
@@ -96,19 +98,36 @@ const Navbar = ({search, handleSearch}) => {
               >
                 Mi carrito
               </Button>
+
             </Link>
-            <Button
-              startIcon={<LogoutIcon />}
-              className="Boton"
-              onClick={handleLogOut}
-              style={{
-                backgroundColor: "#ead7c3",
-                color: "black",
-                fontFamily: "Canaro",
-              }}
-            >
-              Salir
-            </Button>
+            <Link to="/add">
+              <Button
+                startIcon={<AddIcon />}
+                className="Boton"
+                style={{
+                  backgroundColor: "#ead7c3",
+                  color: "black",
+                  fontFamily: "Canaro",
+                }}
+              >
+                Agregar producto
+              </Button>
+            </Link>
+
+            <Link to="/login">
+              <Button
+                startIcon={<LogoutIcon />}
+                className="Boton"
+                onClick={handleLogOut}
+                style={{
+                  backgroundColor: "#ead7c3",
+                  color: "black",
+                  fontFamily: "Canaro",
+                }}
+              >
+                Salir
+              </Button>
+            </Link>
           </>
         )}
       </div>

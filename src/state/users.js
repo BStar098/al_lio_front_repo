@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const localStorageUserData = JSON.parse(localStorage.getItem("loggedInUser"));
+export const localStorageUserData = JSON.parse(localStorage.getItem("loggedInUser"));
 //VALOR INICIAL DE NUESTRO ESTADO USER, SI HAY ALGO GUARDADO EN LOCALSTORAGE, ESO VA A SER NUESTRO ESTADO PREDETERMINADO, SINO SETEAMOS UNO VACÍO, ASÍ LOGRAMOS LA PERSISTENCIA.
 const initialState = localStorageUserData
   ? {

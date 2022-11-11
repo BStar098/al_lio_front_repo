@@ -8,6 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const SearchAppBar = ({handleSearch, search}) => {
 
+
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     backgroundColor: "#ecf8d4",
