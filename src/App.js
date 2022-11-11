@@ -11,17 +11,17 @@ import AddProduct from "./components/AddProduct";
 import { useDispatch } from "react-redux";
 import { getAllProducts } from "./state/products";
 import MiPerfil from "./components/MiPerfil";
-import {usersRequests} from "./state/users";
+import { usersRequests } from "./state/users";
 import CartTest from "./components/CartTest";
-
+import Checkout from "./components/Checkout";
 
 function App() {
   const [search, setSearch] = useState("");
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
 
-  const handleSearch = e => {
-    if(e.key==='Enter'){
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
       setSearch(e.target.value);
     }
     console.log(e.key);
@@ -29,9 +29,9 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllProducts());
-    usersRequests.get("/").then(users=>{
-      setUsers(users.data)
-    })
+    usersRequests.get("/").then((users) => {
+      setUsers(users.data);
+    });
   }, []);
 
   return (
@@ -42,14 +42,17 @@ function App() {
           <Route path="/test" element={<CartTest />}></Route>
           <Route path="/" element={<Main />}></Route>
           <Route path="/:id" element={<Item />}></Route>
-
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/products" element={<Grid search={search} />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Register />}></Route>
           <Route path="/add" element={<AddProduct />}></Route>
           <Route path="/cat/:category" element={<Grid />}></Route>
-          <Route path="/profile" element={<MiPerfil users={users} setUsers={setUsers}/>}></Route>
+          <Route
+            path="/profile"
+            element={<MiPerfil users={users} setUsers={setUsers} />}
+          ></Route>
+          <Route path="/checkout" element={<Checkout />}></Route>
         </Routes>
       </div>
     </div>
